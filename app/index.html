@@ -40,30 +40,29 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div id="layout" class="pure-g-r active">
+    <div id="layout" class="pure-g-r active" ng-controller="NavCtrl">
         <a href="#menu" id="menuLink" class="pure-menu-link active">
-            <span id="yui_3_10_1_1_1377896277104_11"></span>
+            <span></span>
         </a>
-        <div class="pure-u active" id="menu">
+        <nav class="pure-u active" id="menu" qv-active="qv-active-route|pure-menu-selected">
             <div class="pure-menu pure-menu-open">
                 <a class="pure-menu-heading" href="/">Pure</a>
 
                 <ul>
 
-                    <li class="pure-menu-selected">
+                    <li qv-active-route="/galleries">
                         <a href="/galleries">Galleries</a>
                     </li>
 
-                    <li class=" ">
+                    <li qv-active-route="/comments">
                         <a href="/comments">Comments</a>
                     </li>
 
 
                 </ul>
             </div>
-        </div>
-
         </nav>
+
         <div class="pure-u-1" ng-view=""></div>
     </div>
 
@@ -93,6 +92,10 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/galleries.js"></script>
+        <script src="scripts/services/galleryService.js"></script>
+        <script src="scripts/controllers/nav.js"></script>
+        <script src="scripts/directives/qvActive.js"></script>
+        <script src="scripts/services/envService.js"></script>
         <!-- endbuild -->
 </body>
 </html>

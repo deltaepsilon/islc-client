@@ -2,6 +2,7 @@
 
 angular.module('islcClientApp', ['ngRoute'])
   .config(function ($routeProvider, $locationProvider) {
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -10,7 +11,10 @@ angular.module('islcClientApp', ['ngRoute'])
       .when('/galleries', {
         templateUrl: 'views/galleries.html',
         controller: 'GalleriesCtrl',
-        resolve: function () {
+        resolve: {
+          galleries: function (galleryService) {
+            return galleryService.getGalleries();
+          }
 
         }
       })

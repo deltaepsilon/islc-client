@@ -1,10 +1,8 @@
 'use strict';
 
 angular.module('islcClientApp')
-  .controller('GalleriesCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('GalleriesCtrl', function ($scope, $route) {
+    $scope.galleries = $route.current.locals.galleries;
+    console.log('galleries', $scope.galleries);
+
   });
