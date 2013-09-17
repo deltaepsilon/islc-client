@@ -9,10 +9,16 @@
     "angular-cookies": "~1.0.7",
     "angular-sanitize": "~1.0.7",
     "angular-route": "~1.2.0-rc.1",
-    "pure": "~0.3.0-rc-2"
+    "pure": "~0.3.0-rc-2",
+    "angular-grid": "~2.0.7",
+    "angular-animate": "~1.2.0-rc.2",
+    "underscore": "~1.5.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.7",
     "angular-scenario": "~1.0.7"
+  },
+  "resolutions": {
+    "angular": "1.2.0-rc.2"
   }
 }

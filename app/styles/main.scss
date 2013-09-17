@@ -1,0 +1,17 @@
+.content {
+  padding-top: 25px;
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.cursor-hand {
+  &:hover {
+    cursor: pointer;
+  }
+}

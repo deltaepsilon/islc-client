@@ -16,6 +16,8 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
 
+  grunt.loadNpmTasks('grunt-contrib-sass');
+
   // configurable paths
   var yeomanConfig = {
     app: 'app',
@@ -38,8 +40,8 @@ module.exports = function (grunt) {
         tasks: ['coffee:test']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['copy:styles', 'autoprefixer']
+        files: ['<%= yeoman.app %>/styles/{,*/}*.css', '<%= yeoman.app %>/styles/{,*/}*.scss'],
+        tasks: ['sass:app', 'copy:styles', 'autoprefixer']
       },
       livereload: {
         options: {
@@ -313,6 +315,16 @@ module.exports = function (grunt) {
           ]
         }
       }
+    },
+    sass: {
+      app: {
+        options: {
+
+        },
+        files: {
+          'app/styles/main.css': 'app/styles/main.scss'
+        }
+      }
     }
   });
 
@@ -351,7 +363,8 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    'sass'
   ]);
 
   grunt.registerTask('default', [

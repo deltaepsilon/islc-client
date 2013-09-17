@@ -1,3 +1,99 @@
 <div ng-controller="GalleriesCtrl">
-    it's time for galleries baby!
+    <!--ng-grid-->
+    <!--<div class="gridStyle" ng-grid="gridOptions"></div>-->
+
+    <div class="header">
+        <h1>Galleries</h1>
+    </div>
+
+    <div class="content full-width">
+        <form class="pure-form">
+            <legend>Search Galleries</legend>
+            <fieldset>
+                <label for="gallery-filter">Filter By:</label>
+                <select name="gallery-filter" id="gallery-filter" ng-model="galleries.options.filter.column" ng-options="k as v for (k, v) in search.filters"></select>
+                <input type="search" ng-model="galleries.options.filter.text" placeholder="Filter text"/>
+
+                <label for="gallery-sort">Order by:</label>
+                <select name="gallery-sort" id="gallery-sort" ng-model="galleries.options.sort" ng-options="k as v for (k, v) in search.sorts"></select>
+                <select name="gallery-sort-direction" id="gallery-sort-direction" ng-model="galleries.options.direction" ng-options="k as v for (k, v) in search.directions"></select>
+
+                <label for="options-limit">Limit results:</label>
+                <input id="options-limit" type="integer" ng-model="galleries.options.limit"/>
+
+                <button class="pure-button pure-button-primary" ng-click="searchGalleries(false)" ng-disabled="searchDisabled">Search</button>
+            </fieldset>
+        </form>
+        <hr>
+        <table id="galleries-table" class="pure-table pure-table-striped full-width">
+            <thead class="uppercase">
+                <tr>
+                    <th>row</th> <th>id</th> <th>user</th> <th>title</th> <th>updated</th> <th>done</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="animate-repeat" ng-repeat="gallery in galleries.data" ng-click="selectGallery(gallery)">
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ gallery.id }}</td>
+                    <td class="cursor-hand" ng-click="setUserFilter(gallery.user)" title="Filter by: {{ gallery.user.username }}">{{ gallery.user.username }}</td>
+                    <td>{{ gallery.title }}</td>
+                    <td>{{ gallery.updated | date:'MM/dd/yyyy' }}</td>
+                    <td><input
+                            type="checkbox"
+                            ng-model="gallery.marked"
+                            ng-checked="{{ gallery.marked }}"
+                            ng-change="updateGallery(gallery)"
+                            /></td>
+                    <!--<td>-->
+                        <!--<td colspan="100%">ajsdlfkjadsfkljd</td>-->
+                    <!--</td>-->
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="100%">
+                        <button class="pure-button full-width" ng-click="getMoreGalleries()" ng-disabled="searchDisabled">Load More</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div id="gallery-view" ng-show="{{ gallery.id }}">
+            <h2>{{ gallery.title }}</h2>
+            <img src="aws/{{ gallery.filename }}" alt="gallery.title"/>
+            <p>{{ gallery.description }}</p>
+            <hr>
+            <table>
+                <thead>
+                    <th>Comment</th> <th>Created</th> <th>Marked</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="comment in gallery.comments">
+                        <td>{{ comment.comment }}</td>
+                        <td>{{ comment.created | date: 'MM/dd/yyyy' }}</td>
+                        <td><input
+                                type="checkbox"
+                                ng-model="comment.marked"
+                                ng-checked="{{ comment.marked }}"
+                                ng-change="updateComment(comment)"
+                                /></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="100">
+                            <form class="pure-form">
+                                <legend>New Comment</legend>
+                                <fieldset>
+                                    <textarea cols="30" rows="10" ng-model="newComment"></textarea>
+                                    <button ng-click="addComment(gallery, newComment)">Add</button>
+                                </fieldset>
+                            </form>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
 </div>

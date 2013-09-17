@@ -39,29 +39,35 @@ angular.module('islcClientApp')
           break;
       }
       console.log('error', error);
+    },
+    query = function (method, path, params, aDeferred) {
+      var deferred = $q.defer(),
+        aPromise;
+      getEnv().then(function (env) {
+        aPromise = $http({method: method, params: params || {}, headers: {authorization: env.authorization}, url: env.api + path});
+        if (aDeferred) { // Resolve the incoming deferred if present
+          aPromise.then(function () {
+            aDeferred.resolve(arguments[0].data);
+
+          }, function () {
+            handleError(arguments[0]);
+            aDeferred.reject(arguments);
+          })
+        }
+        deferred.resolve(aPromise); // Resolve anyway... it'll be nice coverage for non-idiomatic cases
+
+      });
+      return deferred.promise;
     };
     // AngularJS will instantiate a singleton by calling "new" on this function
 
     return {
       getEnv: getEnv,
-      get: function (path, aDeferred) {
-        var deferred = $q.defer(),
-          aPromise;
-        getEnv().then(function (env) {
-          aPromise = $http({method: 'GET', headers: {authorization: env.authorization}, url: env.api + path});
-          if (aDeferred) { // Resolve the incoming deferred if present
-            aPromise.then(function () {
-              aDeferred.resolve(arguments[0].data);
-
-            }, function () {
-              handleError(arguments[0]);
-              aDeferred.reject(arguments);
-            })
-          }
-          deferred.resolve(aPromise); // Resolve anyway... it'll be nice coverage for non-idiomatic cases
-
-        });
-        return deferred.promise;
+      get: function (path, params, aDeferred) {
+        return query('GET', path, params, aDeferred);
+      },
+      post: function (path, params, aDeferred) {
+        return query('POST', path, params, aDeferred);
       }
     }
   });

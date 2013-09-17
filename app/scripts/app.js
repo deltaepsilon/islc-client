@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('islcClientApp', ['ngRoute'])
+angular.module('islcClientApp', ['ngRoute', 'ngGrid'])
   .config(function ($routeProvider, $locationProvider) {
 
     $routeProvider
@@ -13,9 +13,18 @@ angular.module('islcClientApp', ['ngRoute'])
         controller: 'GalleriesCtrl',
         resolve: {
           galleries: function (galleryService) {
-            return galleryService.getGalleries();
-          }
+            var options = {
+              page: 1,
+              limit: 50,
+              sort: 'l.id',
+              direction: 'desc'
+            }
+            return {
+              options: options,
+              data: galleryService.getGalleries(options)
+            };
 
+          }
         }
       })
       .otherwise({

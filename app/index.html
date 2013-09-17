@@ -27,6 +27,7 @@
         <link rel="stylesheet" href="bower_components/pure/src/menus/css/menus-paginator.css">
         <link rel="stylesheet" href="bower_components/pure/src/menus/css/menus-r.css">
         <link rel="stylesheet" href="bower_components/pure/src/tables/css/tables.css">
+        <link rel="stylesheet" href="bower_components/angular-grid/ng-grid.css"/>
         <!-- endbuild -->
 </head>
   <body ng-app="islcClientApp">
@@ -80,12 +81,15 @@
 
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/underscore/underscore-min.js"></script>
 
         <!-- build:js scripts/modules.js -->
         <script src="bower_components/angular-resource/angular-resource.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-grid/ng-grid-2.0.7.min.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.min.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -96,6 +100,7 @@
         <script src="scripts/controllers/nav.js"></script>
         <script src="scripts/directives/qvActive.js"></script>
         <script src="scripts/services/envService.js"></script>
+        <script src="scripts/services/_.js"></script>
         <!-- endbuild -->
 </body>
 </html>

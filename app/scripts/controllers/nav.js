@@ -3,4 +3,4 @@
 angular.module('islcClientApp')
   .controller('NavCtrl', function ($scope) {
 
-  });
+});
