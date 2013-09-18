@@ -1,3 +1,6 @@
+.pure-g-r {
+  letter-spacing: inherit !important; }
+
 .content {
   padding-top: 25px; }
 
@@ -9,3 +12,73 @@
 
 .cursor-hand:hover {
   cursor: pointer; }
+
+.right {
+  float: right; }
+
+.left {
+  float: left; }
+
+.rotate-90 {
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%; }
+
+.rotate-180 {
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%; }
+
+.rotate-270 {
+  transform: rotate(270deg);
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%; }
+
+#gallery-view {
+  background-color: white;
+  box-sizing: border-box;
+  padding: 1rem; }
+  #gallery-view #gallery-image-placeholder {
+    height: 400px; }
+  #gallery-view #gallery-image-wrapper {
+    min-height: 400px;
+    min-width: 400px;
+    position: relative; }
+  #gallery-view #gallery-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    max-height: 400px;
+    max-width: 400px; }
+  #gallery-view .zoomed {
+    position: absolute !important;
+    top: 2%;
+    right: 2%;
+    bottom: 2%;
+    left: 2%;
+    max-height: 96% !important;
+    max-width: 96% !important;
+    z-index: 1000; }
+    #gallery-view .zoomed #gallery-image {
+      max-height: inherit;
+      max-width: inherit; }
+  #gallery-view #gallery-comments-table {
+    background-color: white; }

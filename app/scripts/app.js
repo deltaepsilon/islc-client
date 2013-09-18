@@ -15,7 +15,7 @@ angular.module('islcClientApp', ['ngRoute', 'ngGrid'])
           galleries: function (galleryService) {
             var options = {
               page: 1,
-              limit: 50,
+              limit: 10,
               sort: 'l.id',
               direction: 'desc'
             }

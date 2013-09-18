@@ -1,9 +1,16 @@
 'use strict';
 
 angular.module('islcClientApp')
-  .controller('GalleriesCtrl', function ($scope, $route, galleryService, _) {
+  .controller('GalleriesCtrl', function ($scope, $route, galleryService, commentService, _) {
+    var rotations = ['rotate-90', 'rotate-180', 'rotate-270', 'rotate-0'];
+
     $scope.galleries = $route.current.locals.galleries;
-    $scope.gallery = null;
+    if ($scope.galleries.data && $scope.galleries.data.length) {
+      $scope.gallery = $scope.galleries.data[0];
+    }
+    $scope.showDrawer = false;
+    $scope.hideDrawer = true;
+
     $scope.search = {
       sorts :{
         'l.id': 'Gallery ID',
@@ -20,6 +27,8 @@ angular.module('islcClientApp')
         'l.marked': 'Done'
       }
     };
+
+
 
 
     $scope.searchGalleries = function (append) {
@@ -76,14 +85,51 @@ angular.module('islcClientApp')
 
     };
 
-    $scope.selectGallery = function (gallery) {
+    $scope.showGallery = function (gallery) {
+      console.log('showing drawer', gallery);
       $scope.gallery = gallery;
-      console.log('selected', $scope.gallery);
+      $scope.toggleGallery(true);
     };
 
-    $scope.deselectGallery = function () {
-      delete $scope.gallery;
-      console.log('deselected', $scope.gallery);
+    $scope.toggleGallery = function (show) {
+      if (show === false) {
+        $scope.showDrawer = false;
+      } else if (show || !!$scope.gallery) {
+        $scope.showDrawer = true;
+      } else {
+        $scope.showDrawer = false;
+      }
+      $scope.hideDrawer = !$scope.showDrawer;
+    };
+
+    $scope.addComment = function (gallery, newComment) {
+      $scope.commentDisabled = true;
+      commentService.addComment(gallery.id, newComment).then(function (comment) {
+        $scope.commentDisabled = false;
+        $scope.gallery.comments.push(comment);
+      });
+
+    };
+
+    $scope.updateComment = function (comment) {
+      commentService.updateComment(comment).then(function (updatedComment) {
+//        console.log('updated comment', updatedComment);
+      });
+    };
+
+    $scope.zoomImage = function () {
+      console.log('zooming image', $scope.zoomed);
+      if ($scope.zoomed) {
+        $scope.zoomed = false;
+      } else {
+        $scope.zoomed = true;
+      }
+
+    };
+
+    $scope.rotateImage = function () {
+      $scope.rotation = rotations.shift();
+      rotations.push($scope.rotation);
     };
 
   });

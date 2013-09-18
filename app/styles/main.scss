@@ -1,3 +1,41 @@
+//Vars
+$dark-gray: #191818;
+$blue: #3b8bba;
+$white: #FFFFFF;
+
+//Mixins
+@mixin absolute {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin border-box {
+  box-sizing: border-box;
+}
+
+@mixin rotate($d) {
+  transform: rotate($d);
+  -webkit-transform: rotate($d);
+  -moz-transform: rotate($d);
+  -ms-transform: rotate($d);
+}
+
+@mixin centered {
+  transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+}
+
+//Pure Overrides
+.pure-g-r {
+  letter-spacing: inherit !important;
+}
+
+//Objects
 .content {
   padding-top: 25px;
 }
@@ -14,4 +52,80 @@
   &:hover {
     cursor: pointer;
   }
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.rotate-90 {
+  @include rotate(90deg);
+  @include centered;
+}
+
+.rotate-180 {
+  @include rotate(180deg);
+  @include centered;
+}
+
+.rotate-270 {
+  @include rotate(270deg);
+  @include centered;
+}
+
+//Implementations
+#gallery-view {
+  background-color: $white;
+  @include border-box;
+  padding: 1rem;
+
+  #gallery-image-placeholder {
+    height: 400px;
+  }
+
+  #gallery-image-wrapper {
+    min-height: 400px;
+    min-width: 400px;
+    position: relative;
+  }
+
+  #gallery-image {
+    @include absolute;
+    margin: auto;
+    max-height: 400px;
+    max-width: 400px;
+  }
+
+  #gallery-image {
+    &.rotate-90, &.rotate-270 {
+      //max-width: 100%;
+      //max-height: 100%;
+    }
+  }
+
+  $zoomed-offset: 2%;
+  .zoomed {
+    position: absolute !important;
+    top: $zoomed-offset;
+    right: $zoomed-offset;
+    bottom: $zoomed-offset;
+    left: $zoomed-offset;
+    max-height: 100 - 2 * $zoomed-offset !important;
+    max-width: 100 - 2 * $zoomed-offset !important;
+    z-index: 1000;
+
+    #gallery-image {
+      max-height: inherit;
+      max-width: inherit;
+    }
+  }
+
+  #gallery-comments-table {
+    background-color: $white;
+  }
+
 }

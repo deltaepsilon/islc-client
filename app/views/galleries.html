@@ -6,8 +6,8 @@
         <h1>Galleries</h1>
     </div>
 
-    <div class="content full-width">
-        <form class="pure-form">
+    <div class="content full-width pure-g-r">
+        <form class="pure-form pure-u-1">
             <legend>Search Galleries</legend>
             <fieldset>
                 <label for="gallery-filter">Filter By:</label>
@@ -23,17 +23,19 @@
 
                 <button class="pure-button pure-button-primary" ng-click="searchGalleries(false)" ng-disabled="searchDisabled">Search</button>
             </fieldset>
+            <hr>
         </form>
-        <hr>
-        <table id="galleries-table" class="pure-table pure-table-striped full-width">
-            <thead class="uppercase">
+
+        <div style="margin-right: auto;" ng-class="{'pure-u-3-5': showDrawer, 'pure-u-1': hideDrawer}">
+            <table id="galleries-table" class="pure-table pure-table-striped full-width">
+                <thead class="uppercase">
                 <tr>
                     <th>row</th> <th>id</th> <th>user</th> <th>title</th> <th>updated</th> <th>done</th>
                 </tr>
-            </thead>
-            <tbody>
-                <tr class="animate-repeat" ng-repeat="gallery in galleries.data" ng-click="selectGallery(gallery)">
-                    <td>{{ $index + 1 }}</td>
+                </thead>
+                <tbody>
+                <tr class="animate-repeat" ng-repeat="gallery in galleries.data">
+                    <td class="cursor-hand" ng-click="showGallery(gallery)">{{ $index + 1 }}</td>
                     <td>{{ gallery.id }}</td>
                     <td class="cursor-hand" ng-click="setUserFilter(gallery.user)" title="Filter by: {{ gallery.user.username }}">{{ gallery.user.username }}</td>
                     <td>{{ gallery.title }}</td>
@@ -44,27 +46,34 @@
                             ng-checked="{{ gallery.marked }}"
                             ng-change="updateGallery(gallery)"
                             /></td>
-                    <!--<td>-->
-                        <!--<td colspan="100%">ajsdlfkjadsfkljd</td>-->
-                    <!--</td>-->
                 </tr>
-            </tbody>
-            <tfoot>
+                </tbody>
+                <tfoot>
                 <tr>
                     <td colspan="100%">
                         <button class="pure-button full-width" ng-click="getMoreGalleries()" ng-disabled="searchDisabled">Load More</button>
                     </td>
                 </tr>
-            </tfoot>
-        </table>
+                </tfoot>
+            </table>
+        </div>
 
-        <div id="gallery-view" ng-show="{{ gallery.id }}">
+        <div id="gallery-view" class="pure-u-2-5 right" ng-show="showDrawer">
+            <span class="cursor-hand right" ng-click="toggleGallery(false)">X</span>
             <h2>{{ gallery.title }}</h2>
-            <img src="aws/{{ gallery.filename }}" alt="gallery.title"/>
+            <div id="gallery-image-placeholder">
+                <div id="gallery-image-wrapper" class="cursor-hand" ng-click="zoomImage()" ng-class="{zoomed: zoomed}" >
+                    <img id="gallery-image" src="aws?path={{ gallery.filename }}" alt="gallery.title" ng-class="rotation"/>
+                </div>
+            </div>
+
+
+            <button class="pure-button" ng-click="rotateImage()">Rotate</button>
+
             <p>{{ gallery.description }}</p>
             <hr>
-            <table>
-                <thead>
+            <table id="gallery-comments-table" class="pure-table pure-table-striped full-width">
+                <thead class="uppercase">
                     <th>Comment</th> <th>Created</th> <th>Marked</th>
                 </thead>
                 <tbody>
@@ -85,8 +94,9 @@
                             <form class="pure-form">
                                 <legend>New Comment</legend>
                                 <fieldset>
-                                    <textarea cols="30" rows="10" ng-model="newComment"></textarea>
-                                    <button ng-click="addComment(gallery, newComment)">Add</button>
+                                    <textarea class="full-width" cols="30" ng-model="newComment"></textarea>
+                                    <br>
+                                    <button class="pure-button pure-button-primary" ng-click="addComment(gallery, newComment)" ng-disabled="commentDisabled">Add</button>
                                 </fieldset>
                             </form>
                         </td>
