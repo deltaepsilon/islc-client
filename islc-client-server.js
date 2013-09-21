@@ -9,24 +9,20 @@ var express = require('express'),
   angularEnvVars = {
     development: {
       env: 'dev',
+      root: '/app',
       islc: 'https://calligraphy.quiver.is',
       api: 'https://calligraphy.quiver.is/api'
     },
     production: {
       env: 'prod',
+      root: '/app',
       islc: 'http://istilllovecalligraphy.com',
       api: 'http://istilllovecalligraphy.com/api'
     }
   },
-  fileRoot;
+  fileRoot = __dirname + angularEnvVars[environment].root;
 
 AWS.config.update({accessKeyId: process.env.AMAZON_ACCESS_KEY_ID, secretAccessKey: process.env.AMAZON_SECRET_ACCESS_KEY});
-
-if (environment === 'development') {
-  fileRoot = __dirname + '/app';
-} else {
-  fileRoot = __dirname + '/dist';
-}
 
 /**
  * Express Middleware!
@@ -39,6 +35,7 @@ app.use(express.session({secret: 'awjklqw34kljaerwtjkladsf234adsfjkladsklaewrjla
  * Access Tokens
  */
 app.get('*',function (req, res, next) {
+//  console.log('url', req.url);
   if (req.param('access_token')) {
     req.session.access_token = req.param('access_token');
   }
