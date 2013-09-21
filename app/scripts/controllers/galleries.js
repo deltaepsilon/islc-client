@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('islcClientApp')
-  .controller('GalleriesCtrl', function ($scope, $route, galleryService, commentService, _) {
+  .controller('GalleriesCtrl', function ($scope, $route, $sanitize, galleryService, commentService, _) {
     var rotations = ['rotate-90', 'rotate-180', 'rotate-270', 'rotate-0'];
 
     $scope.galleries = $route.current.locals.galleries;
@@ -78,15 +78,20 @@ angular.module('islcClientApp')
     $scope.updateGallery = function (gallery) {
 
       galleryService.updateGallery(gallery).then(function (data) {
-        data.title = 'adsfjadsdasfjadslkfajskljas';
-        gallery = data;
-        console.log('data is back', gallery);
+//        data.title = 'adsfjadsdasfjadslkfajskljas';
+//        gallery = data;
+//        console.log('data is back', gallery);
       });
 
     };
 
     $scope.showGallery = function (gallery) {
-      console.log('showing drawer', gallery);
+      console.log(gallery);
+      var i = gallery.comments.length;
+
+      while (i--) {
+        gallery.comments[i].comment = $sanitize(gallery.comments[i].comment);
+      }
       $scope.gallery = gallery;
       $scope.toggleGallery(true);
     };
@@ -103,9 +108,14 @@ angular.module('islcClientApp')
     };
 
     $scope.addComment = function (gallery, newComment) {
+      if (!$scope.newComment || !$scope.newComment.length) {
+        return;
+      }
       $scope.commentDisabled = true;
       commentService.addComment(gallery.id, newComment).then(function (comment) {
         $scope.commentDisabled = false;
+        $scope.newComment = null;
+        comment.comment = $sanitize(comment.comment);
         $scope.gallery.comments.push(comment);
       });
 

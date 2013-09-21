@@ -78,7 +78,11 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="comment in gallery.comments">
-                        <td>{{ comment.comment }}</td>
+                        <td>
+                            <markdown ng-model="comment.comment">
+                            </markdown>
+
+                        </td>
                         <td>{{ comment.created | date: 'MM/dd/yyyy' }}</td>
                         <td><input
                                 type="checkbox"
@@ -99,6 +103,10 @@
                                     <button class="pure-button pure-button-primary" ng-click="addComment(gallery, newComment)" ng-disabled="commentDisabled">Add</button>
                                 </fieldset>
                             </form>
+
+                            <h2>Preview</h2>
+                            <hr>
+                            <markdown ng-model="newComment"></markdown>
                         </td>
                     </tr>
                 </tfoot>
