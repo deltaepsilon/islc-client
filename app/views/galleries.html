@@ -74,14 +74,12 @@
             <hr>
             <table id="gallery-comments-table" class="pure-table pure-table-striped full-width">
                 <thead class="uppercase">
-                    <th>Comment</th> <th>Created</th> <th>Marked</th>
+                    <th>Comment</th> <th>Created</th> <th>Marked</th> <th>Delete</th>
                 </thead>
                 <tbody>
                     <tr ng-repeat="comment in gallery.comments">
                         <td>
-                            <markdown ng-model="comment.comment">
-                            </markdown>
-
+                            <markdown ng-model="comment.comment" line-breaks="true" strip="true"></markdown>
                         </td>
                         <td>{{ comment.created | date: 'MM/dd/yyyy' }}</td>
                         <td><input
@@ -90,6 +88,7 @@
                                 ng-checked="{{ comment.marked }}"
                                 ng-change="updateComment(comment)"
                                 /></td>
+                        <td><span class="cursor-hand" ng-click="deleteComment(comment.id)">DELETE</span></td>
                     </tr>
                 </tbody>
                 <tfoot>
@@ -98,7 +97,7 @@
                             <form class="pure-form">
                                 <legend>New Comment</legend>
                                 <fieldset>
-                                    <textarea class="full-width" cols="30" ng-model="newComment"></textarea>
+                                    <textarea class="full-width" cols="30" ng-model="newComment" ng-trim="false"></textarea>
                                     <br>
                                     <button class="pure-button pure-button-primary" ng-click="addComment(gallery, newComment)" ng-disabled="commentDisabled">Add</button>
                                 </fieldset>

@@ -12,7 +12,13 @@ angular.module('islcClientApp')
 
       updateComment: function (comment) {
         var deferred = $q.defer();
-        envService.post('/updateComment/' + comment.id, _.pick(comment, ['marked']), deferred);
+        envService.post('/updateComment/' + comment.id, _.pick(comment, ['comment', 'marked']), deferred);
+        return deferred.promise;
+      },
+
+      deleteComment: function (id) {
+        var deferred = $q.defer();
+        envService.get('/deleteComment/' + id, {}, deferred);
         return deferred.promise;
       }
     };

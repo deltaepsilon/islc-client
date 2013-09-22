@@ -46,10 +46,15 @@ angular.module('islcClientApp')
 
         return deferred.promise;
       },
+      getGallery: function (id) {
+        var deferred = $q.defer();
+        envService.get('/getGallery/' + id, {}, deferred);
+
+        return deferred.promise;
+      },
       updateGallery: function (gallery) {
         var deferred = $q.defer();
-        gallery.XDEBUG_SESSION_START = 17867;
-        envService.post('/updateGallery/' + gallery.id, _.pick(gallery, ['marked', 'XDEBUG_SESSION_START']), deferred);
+        envService.post('/updateGallery/' + gallery.id, _.pick(gallery, ['marked']), deferred);
 
         return deferred.promise;
       }

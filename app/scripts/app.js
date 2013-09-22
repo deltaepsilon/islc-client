@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('islcClientApp', ['ngRoute', 'ngGrid', 'angular-markdown', 'ngSanitize'])
+angular.module('islcClientApp', ['ngRoute', 'ngGrid', 'angular.markdown', 'ngSanitize'])
   .config(function ($routeProvider, $locationProvider) {
 
     $routeProvider
