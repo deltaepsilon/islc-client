@@ -6,11 +6,6 @@ angular.module('islcClientApp')
     $scope.galleries.options.filter = {
       column: 'm.username'
     };
-    if ($scope.galleries.data && $scope.galleries.data.length) {
-      $scope.gallery = $scope.galleries.data[0];
-    }
-    $scope.showDrawer = false;
-    $scope.hideDrawer = true;
 
     $scope.search = {
       sorts :{
@@ -89,17 +84,6 @@ angular.module('islcClientApp')
     $scope.showGallery = function (gallery) {
       $scope.gallery = commentService.scrubGalleryComments(gallery);
       $scope.toggleGallery(true);
-    };
-
-    $scope.toggleGallery = function (show) {
-      if (show === false) {
-        $scope.showDrawer = false;
-      } else if (show || !!$scope.gallery) {
-        $scope.showDrawer = true;
-      } else {
-        $scope.showDrawer = false;
-      }
-      $scope.hideDrawer = !$scope.showDrawer;
     };
 
   });

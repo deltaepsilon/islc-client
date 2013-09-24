@@ -1,4 +1,4 @@
-<div ng-controller="GalleriesCtrl">
+<div ng-controller="DrawerCtrl">
     <!--ng-grid-->
     <!--<div class="gridStyle" ng-grid="gridOptions"></div>-->
 
@@ -6,7 +6,7 @@
         <h1>Galleries</h1>
     </div>
 
-    <div class="content full-width pure-g-r">
+    <div class="content full-width pure-g-r" ng-controller="GalleriesCtrl">
         <form class="pure-form pure-u-1">
             <legend>Search Galleries</legend>
             <fieldset>
@@ -58,7 +58,7 @@
             </table>
         </div>
 
-        <div class="pure-u-2-5 right" qv-gallery-viewer="gallery" ng-show="showDrawer" close="toggleGallery"></div>
+        <div class="pure-u-2-5 right" qv-gallery-viewer="gallery" ng-show="showDrawer" close="closeGallery"></div>
 
     </div>
 </div>

@@ -1,116 +1,64 @@
-<div ng-controller="GalleriesCtrl">
+<div ng-controller="DrawerCtrl">
     <!--ng-grid-->
     <!--<div class="gridStyle" ng-grid="gridOptions"></div>-->
 
     <div class="header">
-        <h1>Galleries</h1>
+        <h1>Comments</h1>
     </div>
 
-    <div class="content full-width pure-g-r">
+    <div class="content full-width pure-g-r" ng-controller="CommentsCtrl">
         <form class="pure-form pure-u-1">
-            <legend>Search Galleries</legend>
+            <legend>Search Comments</legend>
             <fieldset>
-                <label for="gallery-filter">Filter By:</label>
-                <select name="gallery-filter" id="gallery-filter" ng-model="galleries.options.filter.column" ng-options="k as v for (k, v) in search.filters"></select>
-                <input type="search" ng-model="galleries.options.filter.text" placeholder="Filter text"/>
+                <label for="comment-filter">Filter By:</label>
+                <select name="comment-filter" id="comment-filter" ng-model="comments.options.filter.column" ng-options="k as v for (k, v) in search.filters"></select>
+                <input type="search" ng-model="comments.options.filter.text" placeholder="Filter text"/>
 
-                <label for="gallery-sort">Order by:</label>
-                <select name="gallery-sort" id="gallery-sort" ng-model="galleries.options.sort" ng-options="k as v for (k, v) in search.sorts"></select>
-                <select name="gallery-sort-direction" id="gallery-sort-direction" ng-model="galleries.options.direction" ng-options="k as v for (k, v) in search.directions"></select>
+                <label for="comment-sort">Order by:</label>
+                <select name="comment-sort" id="comment-sort" ng-model="comments.options.sort" ng-options="k as v for (k, v) in search.sorts"></select>
+                <select name="comment-sort-direction" id="comment-sort-direction" ng-model="comments.options.direction" ng-options="k as v for (k, v) in search.directions"></select>
 
                 <label for="options-limit">Limit results:</label>
-                <input id="options-limit" type="integer" ng-model="galleries.options.limit"/>
+                <input id="options-limit" type="integer" ng-model="comments.options.limit"/>
 
-                <button class="pure-button pure-button-primary" ng-click="searchGalleries(false)" ng-disabled="searchDisabled">Search</button>
+                <button class="pure-button pure-button-primary" ng-click="searchComments(false)" ng-disabled="searchDisabled">Search</button>
             </fieldset>
             <hr>
         </form>
 
         <div style="margin-right: auto;" ng-class="{'pure-u-3-5': showDrawer, 'pure-u-1': hideDrawer}">
-            <table id="galleries-table" class="pure-table pure-table-striped full-width">
+            <table id="comments-table" class="pure-table pure-table-striped full-width">
                 <thead class="uppercase">
                 <tr>
-                    <th>row</th> <th>id</th> <th>user</th> <th>title</th> <th>updated</th> <th>done</th>
+                    <th>row</th> <th>id</th> <th>user</th> <th>text</th> <th>updated</th> <th>done</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="animate-repeat" ng-repeat="gallery in galleries.data">
-                    <td class="cursor-hand" ng-click="showGallery(gallery)">{{ $index + 1 }}</td>
-                    <td class="cursor-hand" ng-click="showGallery(gallery)">{{ gallery.id }}</td>
-                    <td class="cursor-hand" ng-click="setUserFilter(gallery.user)" title="Filter by: {{ gallery.user.username }}">{{ gallery.user.username }}</td>
-                    <td class="cursor-hand" ng-click="showGallery(gallery)">{{ gallery.title }}</td>
-                    <td class="cursor-hand" ng-click="showGallery(gallery)">{{ gallery.updated | date:'MM/dd/yyyy' }}</td>
-                    <td><input
-                            type="checkbox"
-                            ng-model="gallery.marked"
-                            ng-checked="{{ gallery.marked }}"
-                            ng-change="updateGallery(gallery)"
-                            /></td>
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="100%">
-                        <button class="pure-button full-width" ng-click="getMoreGalleries()" ng-disabled="searchDisabled">Load More</button>
-                    </td>
-                </tr>
-                </tfoot>
-            </table>
-        </div>
-
-        <div id="gallery-view" class="pure-u-2-5 right" ng-show="showDrawer">
-            <span class="cursor-hand right" ng-click="toggleGallery(false)">X</span>
-            <h2>{{ gallery.title }}</h2>
-            <div id="gallery-image-placeholder">
-                <div id="gallery-image-wrapper" class="cursor-hand" ng-click="zoomImage()" ng-class="{zoomed: zoomed}" >
-                    <img id="gallery-image" src="aws?path={{ gallery.filename }}" alt="gallery.title" ng-class="rotation"/>
-                </div>
-            </div>
-
-
-            <button class="pure-button" ng-click="rotateImage()">Rotate</button>
-
-            <p>{{ gallery.description }}</p>
-            <hr>
-            <table id="gallery-comments-table" class="pure-table pure-table-striped full-width">
-                <thead class="uppercase">
-                <th>Comment</th> <th>Created</th> <th>Marked</th> <th>Delete</th>
-                </thead>
-                <tbody>
-                <tr ng-repeat="comment in gallery.comments">
-                    <td>
-                        <markdown ng-model="comment.comment" line-breaks="true" strip="true"></markdown>
-                    </td>
-                    <td>{{ comment.created | date: 'MM/dd/yyyy' }}</td>
+                <tr class="animate-repeat" ng-repeat="comment in comments.data">
+                    <td class="cursor-hand" ng-click="showGallery(comment.gallery.id)">{{ $index + 1 }}</td>
+                    <td class="cursor-hand" ng-click="showGallery(comment.gallery.id)">{{ comment.id }}</td>
+                    <td class="cursor-hand" ng-click="setUserFilter(comment.gallery.user)" title="Filter by: {{ comment.user.username }}">{{ comment.user.username }}</td>
+                    <td class="cursor-hand" ng-click="showGallery(comment.gallery.id)">{{ comment.comment }}</td>
+                    <td class="cursor-hand" ng-click="showGallery(comment.gallery.id)">{{ comment.updated | date:'MM/dd/yyyy' }}</td>
                     <td><input
                             type="checkbox"
                             ng-model="comment.marked"
                             ng-checked="{{ comment.marked }}"
                             ng-change="updateComment(comment)"
                             /></td>
-                    <td><span class="cursor-hand" ng-click="deleteComment(comment.id)">DELETE</span></td>
                 </tr>
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td colspan="100">
-                        <form class="pure-form">
-                            <legend>New Comment</legend>
-                            <fieldset>
-                                <textarea class="full-width" cols="30" ng-model="newComment" ng-trim="false"></textarea>
-                                <br>
-                                <button class="pure-button pure-button-primary" ng-click="addComment(gallery, newComment)" ng-disabled="commentDisabled">Add</button>
-                            </fieldset>
-                        </form>
-
-                        <h2>Preview</h2>
-                        <hr>
-                        <markdown ng-model="newComment"></markdown>
+                    <td colspan="100%">
+                        <button class="pure-button full-width" ng-click="getMoreComments()" ng-disabled="searchDisabled">Load More</button>
                     </td>
                 </tr>
                 </tfoot>
             </table>
         </div>
+
+        <div class="pure-u-2-5 right" qv-gallery-viewer="gallery" ng-show="showDrawer" close="toggleGallery"></div>
 
     </div>
 </div>
