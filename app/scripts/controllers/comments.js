@@ -50,6 +50,10 @@ angular.module('islcClientApp')
           $scope.searchDisabled = false;
         }
 
+      }, function (data) {
+        console.error('error', data);
+        alert('No more comments found.')
+        $scope.searchDisabled = false;
       });
     };
 

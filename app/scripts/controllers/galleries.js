@@ -53,6 +53,10 @@ angular.module('islcClientApp')
           $scope.searchDisabled = false;
         }
 
+      }, function (data) {
+        console.error('error', data);
+        alert('No more galleries found.')
+        $scope.searchDisabled = false;
       });
     };
 
