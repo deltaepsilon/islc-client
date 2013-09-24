@@ -27,6 +27,25 @@ angular.module('islcClientApp', ['ngRoute', 'ngGrid', 'angular.markdown', 'ngSan
           }
         }
       })
+      .when('/comments', {
+        templateUrl: 'views/comments.html',
+        controller: 'CommentsCtrl',
+        resolve: {
+          comments: function (commentService) {
+            var options = {
+              page: 1,
+              limit: 10,
+              sort: 'l.id',
+              direction: 'desc'
+            }
+            return {
+              options: options,
+              data: commentService.getComments(options)
+            };
+
+          }
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -1,0 +1,53 @@
+<div class="gallery-view">
+    <span class="cursor-hand right" ng-click="toggler(false)">X</span>
+    <h2>{{ gallery.title }}</h2>
+    <div id="gallery-image-placeholder">
+        <div id="gallery-image-wrapper" class="cursor-hand" ng-click="zoomImage()" ng-class="{zoomed: zoomed}" >
+            <img id="gallery-image" src="aws?path={{ gallery.filename }}" alt="gallery.title" ng-class="rotation"/>
+        </div>
+    </div>
+
+
+    <button class="pure-button" ng-click="rotateImage()">Rotate</button>
+
+    <p>{{ gallery.description }}</p>
+    <hr>
+    <table id="gallery-comments-table" class="pure-table pure-table-striped full-width">
+        <thead class="uppercase">
+        <th>Comment</th> <th>Created</th> <th>Marked</th> <th>Delete</th>
+        </thead>
+        <tbody>
+        <tr ng-repeat="comment in gallery.comments">
+            <td>
+                <markdown ng-model="comment.comment" line-breaks="true" strip="true"></markdown>
+            </td>
+            <td>{{ comment.created | date: 'MM/dd/yyyy' }}</td>
+            <td><input
+                    type="checkbox"
+                    ng-model="comment.marked"
+                    ng-checked="{{ comment.marked }}"
+                    ng-change="updateComment(comment)"
+                    /></td>
+            <td><span class="cursor-hand" ng-click="deleteComment(comment.id)">DELETE</span></td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="100">
+                <form class="pure-form">
+                    <legend>New Comment</legend>
+                    <fieldset>
+                        <textarea class="full-width" cols="30" ng-model="newComment" ng-trim="false"></textarea>
+                        <br>
+                        <button class="pure-button pure-button-primary" ng-click="addComment(gallery, newComment)" ng-disabled="commentDisabled">Add</button>
+                    </fieldset>
+                </form>
+
+                <h2>Preview</h2>
+                <hr>
+                <markdown ng-model="newComment"></markdown>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>

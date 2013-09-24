@@ -78,7 +78,7 @@ $white: #FFFFFF;
 }
 
 //Implementations
-#gallery-view {
+.gallery-view {
   background-color: $white;
   @include border-box;
   padding: 1rem;

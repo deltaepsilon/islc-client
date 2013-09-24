@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('islcClientApp')
-  .service('galleryService', function galleryService($rootScope, $q, envService, _) {
+  .service('galleryService', function galleryService($q, envService, _) {
     return {
       getGalleries: function (options) {
         var deferred = $q.defer(),
