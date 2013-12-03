@@ -5,6 +5,13 @@ angular.module('islcClientApp')
     $scope.discounts = discounts;
 
     $scope.updateDiscount = function (discount) {
-      discountService.update(discount);
+      discountService.update(discount).then(function (res) {
+        var i = $scope.discounts.length;
+        while (i--) {
+          if ($scope.discounts[i].id === res.id) {
+            $scope.discounts[i] = res;
+          }
+        }
+      });
     };
   });

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('islcClientApp')
-  .service('discountService', function discountService(envService, Restangular) {
+  .service('discountService', function discountService(envService, Restangular, _) {
 
     return {
       get: function (id) {
@@ -14,27 +14,25 @@ angular.module('islcClientApp')
       },
 
       update: function (discount) {
+        _.map(['expires', 'uses', 'max_uses', 'value', 'percentage'], function (key) {
+          if (discount[key] && typeof discount[key] === 'string') {
+            discount[key] = parseFloat(discount[key]);
+            if (isNaN(discount[key])) {
+              discount[key] = 0;
+            }
+          }
+        });
+
         if (discount.value) {
           discount.percentage = null;
         }
-        if (typeof discount.value === 'string') {
-          discount.value = parseFloat(discount.value);
-          if (isNaN(discount.value)) {
-            discount.value = null;
-          }
-        }
-        if (typeof discount.percentage === 'string') {
-          discount.percentage= parseFloat(discount.percentage);
-          if (isNaN(discount.percentage)) {
-            discount.percentage = null;
-          }
-        }
+
         if (discount.percentage) {
           discount.percentage = Math.min(discount.percentage, 1);
           discount.percentage = Math.max(discount.percentage, 0);
         }
 
-        discount.put();
+        return discount.put();
       }
     }
   });
