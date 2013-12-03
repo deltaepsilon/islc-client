@@ -2,6 +2,8 @@
 
 angular.module('islcClientApp')
   .controller('DiscountsCtrl', function ($scope, discounts, discountService) {
+    $scope.filter = {};
+
     $scope.discounts = discounts;
 
     $scope.updateDiscount = function (discount) {
@@ -14,4 +16,28 @@ angular.module('islcClientApp')
         }
       });
     };
+
+    $scope.discountFilter = function (row) {
+      if (!$scope.filter) {
+        return true;
+      } else {
+
+        var filter = $scope.filter,
+          keys = Object.keys($scope.filter || {}),
+          i = keys.length,
+          key,
+          value;
+
+        while (i--) {
+          key = keys[i];
+          value = filter[key] ? filter[key].toString().toLowerCase() : null;
+          if (value && (!row[key] || !row[key].toString().toLowerCase().match(value))) {
+            return false;
+          }
+        }
+
+      }
+
+      return true;
+    }
   });

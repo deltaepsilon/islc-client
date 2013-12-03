@@ -10,31 +10,42 @@
         <div style="margin-right: auto;" ng-class="{'pure-u-3-5': showDrawer, 'pure-u-1': hideDrawer}">
             <table id="discounts-table" class="pure-table pure-table-striped full-width">
                 <thead class="uppercase">
-                <tr>
-                    <th>row</th>
-                    <th>id</th>
-                    <th>code</th>
-                    <th>expires</th>
-                    <th>uses</th>
-                    <th>max uses</th>
-                    <th>value</th>
-                    <th>percentage</th>
-                    <th>created</th>
-                </tr>
+                    <tr>
+                        <th>row</th>
+                        <th>id</th>
+                        <th>code</th>
+                        <th>expires</th>
+                        <th>uses</th>
+                        <th>max uses</th>
+                        <th>value</th>
+                        <th>percentage</th>
+                        <th>created</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr class="animate-repeat" ng-repeat="discount in discounts">
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ discount.id }}</td>
-                    <td contenteditable="true" ng-model="discount.code" ng-change="updateDiscount(discount)">{{ discount.code }}</td>
-                    <td contenteditable="true" ng-model="discount.expires" ng-change="updateDiscount(discount)">{{ discount.expires }}</td>
-                    <td contenteditable="true" ng-model="discount.uses" ng-change="updateDiscount(discount)">{{ discount.uses }}</td>
-                    <td contenteditable="true" ng-model="discount.max_uses" ng-change="updateDiscount(discount)">{{ discount.max_uses }}</td>
-                    <td contenteditable="true" ng-model="discount.value" ng-change="updateDiscount(discount)">{{ discount.value }}</td>
-                    <td contenteditable="true" ng-model="discount.percentage" ng-change="updateDiscount(discount)">{{ discount.percentage }}</td>
-                    <td>{{ discount.created | date }}</td>
+                    <tr>
+                        <td></td>
+                        <td contenteditable="true" ng-model="filter.id"></td>
+                        <td contenteditable="true" ng-model="filter.code"></td>
+                        <td contenteditable="true" ng-model="filter.expires"></td>
+                        <td contenteditable="true" ng-model="filter.uses"></td>
+                        <td contenteditable="true" ng-model="filter.max_uses"></td>
+                        <td contenteditable="true" ng-model="filter.value"></td>
+                        <td contenteditable="true" ng-model="filter.percentage"></td>
+                        <td contenteditable="true" ng-model="filter.created"></td>
+                    </tr>
+                    <tr class="animate-repeat" ng-repeat="discount in discounts | filter:discountFilter">
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ discount.id }}</td>
+                        <td contenteditable="true" ng-model="discount.code" ng-change="updateDiscount(discount)">{{ discount.code }}</td>
+                        <td contenteditable="true" ng-model="discount.expires" ng-change="updateDiscount(discount)">{{ discount.expires }}</td>
+                        <td contenteditable="true" ng-model="discount.uses" ng-change="updateDiscount(discount)">{{ discount.uses }}</td>
+                        <td contenteditable="true" ng-model="discount.max_uses" ng-change="updateDiscount(discount)">{{ discount.max_uses }}</td>
+                        <td contenteditable="true" ng-model="discount.value" ng-change="updateDiscount(discount)">{{ discount.value }}</td>
+                        <td contenteditable="true" ng-model="discount.percentage" ng-change="updateDiscount(discount)">{{ discount.percentage }}</td>
+                        <td>{{ discount.created }}</td>
 
-                </tr>
+                    </tr>
                 </tbody>
                 <tfoot>
                 <tr>
