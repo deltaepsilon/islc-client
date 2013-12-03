@@ -11,14 +11,28 @@
             <table id="discounts-table" class="pure-table pure-table-striped full-width">
                 <thead class="uppercase">
                 <tr>
-                    <th>row</th> <th>id</th> <th>code</th>
+                    <th>row</th>
+                    <th>id</th>
+                    <th>code</th>
+                    <th>expires</th>
+                    <th>uses</th>
+                    <th>max uses</th>
+                    <th>value</th>
+                    <th>percentage</th>
+                    <th>created</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr class="animate-repeat" ng-repeat="discount in discounts">
-                    <td class="cursor-hand">{{ $index + 1 }}</td>
-                    <td class="cursor-hand" >{{ discount.id }}</td>
-                    <td class="cursor-hand" >{{ discount.code }}</td>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ discount.id }}</td>
+                    <td contenteditable="true" ng-model="discount.code" ng-change="updateDiscount(discount)">{{ discount.code }}</td>
+                    <td contenteditable="true" ng-model="discount.expires" ng-change="updateDiscount(discount)">{{ discount.expires }}</td>
+                    <td contenteditable="true" ng-model="discount.uses" ng-change="updateDiscount(discount)">{{ discount.uses }}</td>
+                    <td contenteditable="true" ng-model="discount.max_uses" ng-change="updateDiscount(discount)">{{ discount.max_uses }}</td>
+                    <td contenteditable="true" ng-model="discount.value" ng-change="updateDiscount(discount)">{{ discount.value }}</td>
+                    <td contenteditable="true" ng-model="discount.percentage" ng-change="updateDiscount(discount)">{{ discount.percentage }}</td>
+                    <td>{{ discount.created | date }}</td>
 
                 </tr>
                 </tbody>
