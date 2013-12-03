@@ -2,10 +2,21 @@
 
 angular.module('islcClientApp')
   .controller('CommentsCtrl', function ($scope, commentService, galleryService, comments) {
-    $scope.comments = comments;
+    $scope.comments = {
+      options: comments.options,
+      data: comments.data
+    };
     $scope.comments.options.filter = {
       column: 'm.username'
     };
+
+    if (comments.data.then) {
+      $scope.comments.data = [];
+
+      comments.data.then(function (res) {
+        $scope.comments.data = res;
+      });
+    }
 
     $scope.search = {
       sorts :{

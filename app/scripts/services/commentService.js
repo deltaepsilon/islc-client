@@ -1,69 +1,40 @@
 'use strict';
 
 angular.module('islcClientApp')
-  .service('commentService', function commentService($q, envService, _, $sanitize) {
+  .service('commentService', function commentService(Restangular, $sanitize) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     return {
       getComments: function (options) {
-        var deferred = $q.defer(),
-          query = [],
-          page = 1,
-          limit = 50,
-          url,
-          keys,
-          key,
-          value,
-          i;
-        if (options) {
-          keys = Object.keys(options);
-          i = keys.length;
-          while (i--) {
-            key = keys[i];
-            value = options[key];
+        var newOptions = _.clone(options) || {};
 
-            if (key === 'page') { // Set page
-              page = value;
-
-            } else if (key === 'limit') { // Set limit
-              limit = value;
-
-            } else if (key === 'filter') { // Set filter
-              if (value && value.column && value.text) {
-                query.push('filter:' + value.column + '=' + value.text);
-              }
-
-            } else { // Set the rest
-              query.push(keys[i] + '=' + options[keys[i]]);
-            }
-
+        if (options.filter ) {
+          if (options.filter.column && options.filter.text && options.filter.text.length) {
+            newOptions['filter:' + options.filter.column] = options.filter.text;
           }
 
-          url = '/getComments/' + page + '/' + limit;
-          if (query.length) {
-            url += '?' + query.join('&');
-          }
+          delete newOptions.filter;
+
         }
-        envService.get(url, null, deferred);
 
-        return deferred.promise;
+        return Restangular.one('page', options.page || 1).one('limit', options.limit || 50).all('comment').getList(newOptions)
       },
 
-      addComment: function (galleryID, comment) {
-        var deferred = $q.defer();
-        envService.post('/createComment/' + galleryID, {comment: comment, marked: false}, deferred);
-        return deferred.promise;
+      addComment: function (galleryID, text) {
+        var comment = {
+          comment: text,
+          marked: false
+        };
+
+        Restangular.one('gallery', gallerID).all('comment').put(comment)
       },
 
       updateComment: function (comment) {
-        var deferred = $q.defer();
-        envService.post('/updateComment/' + comment.id, _.pick(comment, ['comment', 'marked']), deferred);
-        return deferred.promise;
+        return comment.put();
       },
 
-      deleteComment: function (id) {
-        var deferred = $q.defer();
-        envService.get('/deleteComment/' + id, {}, deferred);
-        return deferred.promise;
+      deleteComment: function (comment) {
+        return comment.remove();
+
       },
 
       scrubGalleryComments: function (gallery) {
