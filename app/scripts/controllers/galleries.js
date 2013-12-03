@@ -1,11 +1,23 @@
 'use strict';
 
 angular.module('islcClientApp')
-  .controller('GalleriesCtrl', function ($scope, $route, galleryService, commentService, _) {
-    $scope.galleries = $route.current.locals.galleries;
+  .controller('GalleriesCtrl', function ($scope, galleryService, commentService, _, galleries) {
+    $scope.galleries = {
+      options: galleries.options,
+      data: galleries.data
+    };
     $scope.galleries.options.filter = {
       column: 'm.username'
     };
+
+    if (galleries.data.then) {
+      $scope.galleries.data = [];
+
+      galleries.data.then(function (res) {
+        $scope.galleries.data = res;
+      });
+    }
+
 
     $scope.search = {
       sorts :{

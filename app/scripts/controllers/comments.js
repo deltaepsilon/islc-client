@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('islcClientApp')
-  .controller('CommentsCtrl', function ($scope, $route, commentService, galleryService) {
-    $scope.comments = $route.current.locals.comments;
+  .controller('CommentsCtrl', function ($scope, commentService, galleryService, comments) {
+    $scope.comments = comments;
     $scope.comments.options.filter = {
       column: 'm.username'
     };

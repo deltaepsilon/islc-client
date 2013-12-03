@@ -1,0 +1,36 @@
+<div ng-controller="DrawerCtrl">
+    <!--ng-grid-->
+    <!--<div class="gridStyle" ng-grid="gridOptions"></div>-->
+
+    <div class="header">
+        <h1>Discounts</h1>
+    </div>
+
+    <div class="content full-width pure-g-r">
+        <div style="margin-right: auto;" ng-class="{'pure-u-3-5': showDrawer, 'pure-u-1': hideDrawer}">
+            <table id="discounts-table" class="pure-table pure-table-striped full-width">
+                <thead class="uppercase">
+                <tr>
+                    <th>row</th> <th>id</th> <th>code</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="animate-repeat" ng-repeat="discount in discounts">
+                    <td class="cursor-hand">{{ $index + 1 }}</td>
+                    <td class="cursor-hand" >{{ discount.id }}</td>
+                    <td class="cursor-hand" >{{ discount.code }}</td>
+
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="100%">
+                        <!--<button class="pure-button full-width" ng-click="getMoreComments()" ng-disabled="searchDisabled">Load More</button>-->
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+</div>

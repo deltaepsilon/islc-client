@@ -95,13 +95,26 @@ app.get('/aws', function (req, res) {
  * Set up Angular routes to return index.html
 */
 var returnIndex = function (req, res) {
+  var ENV_VARS_REGEX = /{{ envVars }}/,
+    env = angularEnvVars[environment];
+
+    if (req.session.access_token) { // Tack on the access_token for good luck.
+      env.access_token = req.session.access_token;
+      env.authorization = 'Bearer ' + env.access_token;
+    };
+
     fs.readFile(fileRoot + '/index.html', {encoding: 'utf8'}, function (err, data) {
+      data = data.replace(ENV_VARS_REGEX, 'window.envVars = ' + JSON.stringify(env) + ';');
       res.send(data);
     });
   };
 
+app.get('/', returnIndex);
+app.get('/index.html', returnIndex);
 app.get('/galleries', returnIndex);
 app.get('/comments', returnIndex);
+app.get('/discounts', returnIndex);
+app.get('/transactions', returnIndex);
 
 /**
  * Serve static files

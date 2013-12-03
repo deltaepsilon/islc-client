@@ -1,62 +1,29 @@
 'use strict';
 
 angular.module('islcClientApp')
-  .service('galleryService', function galleryService($q, envService, _) {
+  .service('galleryService', function galleryService(Restangular, _) {
     return {
       getGalleries: function (options) {
-        var deferred = $q.defer(),
-          query = [],
-          page = 1,
-          limit = 50,
-          url,
-          keys,
-          key,
-          value,
-          i;
-        if (options) {
-          keys = Object.keys(options);
-          i = keys.length;
-          while (i--) {
-            key = keys[i];
-            value = options[key];
 
-            if (key === 'page') { // Set page
-              page = value;
+        var newOptions = _.clone(options) || {};
 
-            } else if (key === 'limit') { // Set limit
-              limit = value;
-
-            } else if (key === 'filter') { // Set filter
-              if (value && value.column && value.text) {
-                query.push('filter:' + value.column + '=' + value.text);
-              }
-
-            } else { // Set the rest
-              query.push(keys[i] + '=' + options[keys[i]]);
-            }
-
+        if (options.filter ) {
+          if (options.filter.column && options.filter.text && options.filter.text.length) {
+            newOptions['filter:' + options.filter.column] = options.filter.text;
           }
 
-          url = '/getGalleries/' + page + '/' + limit;
-          if (query.length) {
-            url += '?' + query.join('&');
-          }
+          delete newOptions.filter;
+
         }
-        envService.get(url, null, deferred);
 
-        return deferred.promise;
+        return Restangular.one('page', options.page || 1).one('limit', options.limit || 50).all('gallery').getList(newOptions)
+
       },
-      getGallery: function (id) {
-        var deferred = $q.defer();
-        envService.get('/getGallery/' + id, {}, deferred);
-
-        return deferred.promise;
+      get: function (id) {
+        return Restangular.one('gallery', id);
       },
       updateGallery: function (gallery) {
-        var deferred = $q.defer();
-        envService.post('/updateGallery/' + gallery.id, _.pick(gallery, ['marked']), deferred);
-
-        return deferred.promise;
+        return gallery.put();
       }
     }
 

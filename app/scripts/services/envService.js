@@ -1,22 +1,21 @@
 'use strict';
 
 angular.module('islcClientApp')
-  .service('envService', function EnvService($q, $rootScope, $http, $location) {
+  .service('envService', function EnvService($window, $q, $rootScope, $http, Restangular) {
+
+
+
     var getEnv = function () {
-      var deferred = $q.defer();
-      if ($rootScope.env) {
-        deferred.resolve($rootScope.env);
-      } else {
-        $http.get('/env').
-          success(function (data) {
-            $rootScope.env = data;
-            deferred.resolve(data);
-          }).
-          error(function (data) {
-            deferred.reject(data);
-          });
-      }
-      return deferred.promise;
+      return $window.envVars;
+    },
+    setRestangular = function (restangular) {
+      var env = getEnv();
+
+      restangular = restangular || Restangular;
+
+      console.log('env', env);
+      restangular.setBaseUrl(env.api);
+      restangular.setDefaultHeaders({authorization: env.authorization});
     },
     handleError = function (data) {
       var error = data.data.error,
@@ -42,27 +41,28 @@ angular.module('islcClientApp')
     },
     query = function (method, path, params, aDeferred) {
       var deferred = $q.defer(),
-        aPromise;
-      getEnv().then(function (env) {
-        aPromise = $http({method: method, params: params || {}, headers: {authorization: env.authorization}, url: env.api + path});
-        if (aDeferred) { // Resolve the incoming deferred if present
-          aPromise.then(function () {
-            aDeferred.resolve(arguments[0].data);
+        aPromise,
+        env = getEnv();
 
-          }, function () {
-            handleError(arguments[0]);
-            aDeferred.reject(arguments);
-          })
-        }
-        deferred.resolve(aPromise); // Resolve anyway... it'll be nice coverage for non-idiomatic cases
+      aPromise = $http({method: method, params: params || {}, headers: {authorization: env.authorization}, url: env.api + path});
+      if (aDeferred) { // Resolve the incoming deferred if present
+        aPromise.then(function () {
+          aDeferred.resolve(arguments[0].data);
 
-      });
+        }, function () {
+          handleError(arguments[0]);
+          aDeferred.reject(arguments);
+        })
+      }
+      deferred.resolve(aPromise); // Resolve anyway... it'll be nice coverage for non-idiomatic cases
+
       return deferred.promise;
     };
     // AngularJS will instantiate a singleton by calling "new" on this function
 
     return {
       getEnv: getEnv,
+      setRestangular: setRestangular,
       get: function (path, params, aDeferred) {
         return query('GET', path, params, aDeferred);
       },
