@@ -6,6 +6,10 @@ angular.module('islcClientApp')
 
     $scope.discounts = discounts;
 
+    $scope.create = function (discount, multiples) {
+
+    };
+
     $scope.updateDiscount = function (discount) {
       discountService.update(discount).then(function (res) {
         var i = $scope.discounts.length;
