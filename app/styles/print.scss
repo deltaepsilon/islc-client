@@ -1,0 +1,82 @@
+.print-display-none, .print-clicked {
+  display: none !important;
+}
+
+.print-hidden {
+  visibility: hidden !important;
+}
+
+body {
+  color: black;
+  margin: 0;
+}
+
+#layout {
+  padding: 0;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0 !important;
+}
+
+.header {
+  display: none;
+}
+
+.content {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+
+
+
+.print-label {
+
+  &.pure-table {
+    border-width: 0 !important;
+
+    td, th {
+      //border-width: 0 !important;
+      border: 1px solid black;
+      box-sizing: border-box;
+      height: 2.4cm;
+      width: 9.45cm;
+    }
+  }
+
+  &.pure-table-striped {
+    tr:nth-child(2n-1) {
+      td {
+        background-color: transparent !important;
+      }
+    }
+  }
+
+  tr {
+    display: inline-block;
+  }
+
+  td {
+    display: inline-block;
+  }
+
+  .address-name {
+    display: block;
+  }
+
+  .address-line1, .address-line3, .address-line3 {
+    display: block;
+  }
+
+  .address-city {
+    display: block;
+  }
+
+  .address-country {
+    display: block;
+  }
+}

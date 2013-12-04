@@ -29,6 +29,7 @@
         <link rel="stylesheet" href="bower_components/pure/src/tables/css/tables.css">
         <link rel="stylesheet" href="bower_components/angular-grid/ng-grid.css"/>
         <!-- endbuild -->
+        <link rel="stylesheet" href="styles/print.css" media="print"/>
 
       <script type="text/javascript">
           {{ envVars }}
@@ -46,10 +47,10 @@
 
     <!-- Add your site or application content here -->
     <div id="layout" class="pure-g-r active" ng-controller="NavCtrl">
-        <a href="#menu" id="menuLink" class="pure-menu-link active">
+        <a href="#menu" id="menuLink" class="pure-menu-link active print-display-none">
             <span></span>
         </a>
-        <nav class="pure-u-1 active" id="menu" qv-active="qv-active-route|pure-menu-selected">
+        <nav class="pure-u-1 active print-display-none" id="menu" qv-active="qv-active-route|pure-menu-selected">
             <div class="pure-menu pure-menu-open">
                 <a class="pure-menu-heading" href="/">Pure</a>
 
@@ -113,6 +114,7 @@
         <script src="scripts/directives/qvDisable.js"></script>
         <script src="scripts/controllers/Transactions.js"></script>
         <script src="scripts/services/transactionService.js"></script>
+        <script src="scripts/directives/qvClickTarget.js"></script>
         <!-- endbuild -->
 </body>
 </html>

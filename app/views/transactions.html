@@ -3,7 +3,7 @@
 </div>
 
 <div class="content full-width pure-g-r">
-    <form class="pure-form pure-u-1">
+    <form class="pure-form pure-u-1 print-display-none">
         <legend>Search Transactions</legend>
         <fieldset>
             <label for="transaction-filter">Filter By:</label>
@@ -24,8 +24,8 @@
 
 
     <div class="pure-u-1" style="margin-right: auto;">
-        <table id="discounts-table" class="pure-table pure-table-striped full-width">
-            <thead class="uppercase">
+        <table id="discounts-table" class="pure-table pure-table-striped full-width print-label">
+            <thead class="uppercase print-display-none">
                 <tr>
                     <th>row</th>
                     <th>id</th>
@@ -42,32 +42,32 @@
             </thead>
             <tbody>
                 <tr class="animate-repeat row-{{ $index }}" ng-repeat="transaction in transactions.data.items">
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ transaction.id }}</td>
-                    <td class="cursor-hand" ng-click="setUserFilter(transaction.user)" title="Filter by: {{ transaction.user.username }}">{{ transaction.user.username }}</td>
-                    <td><a href="mailto:{{ transaction.user.email }}">{{ transaction.user.email }}</a></td>
+                    <td class="print-display-none cursor-hand" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">{{ $index + 1 }}</td>
+                    <td class="print-display-none cursor-hand" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">{{ transaction.id }}</td>
+                    <td class="print-display-none cursor-hand" ng-click="setUserFilter(transaction.user)" title="Filter by: {{ transaction.user.username }}">{{ transaction.user.username }}</td>
+                    <td class="print-display-none"><a href="mailto:{{ transaction.user.email }}">{{ transaction.user.email }}</a></td>
                     <td>
-                        <span>{{ transaction.user.address.first }} {{ transaction.user.address.last }}</span>
-                        <span>{{ transaction.user.address.line1 }}</span>
-                        <span>{{ transaction.user.address.line2 }}</span>
-                        <span>{{ transaction.user.address.line3 }}</span>
-                        <span ng-show="transaction.user.address">{{ transaction.user.address.city }}<span ng-show="transaction.user.address.city && (transaction.user.address.state || transaction.user.address.code)">,</span> {{ transaction.user.address.state }} {{ transaction.user.address.code }}</span>
-                        <span>{{ transaction.user.address.country }}</span>
+                        <span class="address-name">{{ transaction.user.address.first }} {{ transaction.user.address.last }}</span>
+                        <span class="address-line1">{{ transaction.user.address.line1 }}</span>
+                        <span class="address-line2">{{ transaction.user.address.line2 }}</span>
+                        <span class="address-line3">{{ transaction.user.address.line3 }}</span>
+                        <span class="address-city" ng-show="transaction.user.address">{{ transaction.user.address.city }}<span ng-show="transaction.user.address.city && (transaction.user.address.state || transaction.user.address.code)">,</span> {{ transaction.user.address.state }} {{ transaction.user.address.code }}</span>
+                        <span class="address-country">{{ transaction.user.address.country }}</span>
                     </td>
-                    <td>{{ transaction.user.address.instructions }}</td>
-                    <td><span ng-show="transaction.discount_applied">-${{ transaction.discount_applied }}</span></td>
-                    <td>
+                    <td class="print-display-none cursor-hand" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">{{ transaction.user.address.instructions }}</td>
+                    <td class="print-display-none cursor-hand" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked"><span ng-show="transaction.discount_applied">-${{ transaction.discount_applied }}</span></td>
+                    <td class="print-display-none cursor-hand" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">
                         <span ng-repeat="product in transaction.products">{{ product.title }}</span>
                     </td>
-                    <td>${{ transaction.amount }}</td>
-                    <td>{{ transaction.created | date }}</td>
-                    <td>
+                    <td class="print-display-none cursor-hand" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">${{ transaction.amount }}</td>
+                    <td class="print-display-none cursor-hand" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">{{ transaction.created | date }}</td>
+                    <td class="print-display-none">
                         <input type="checkbox" ng-model="transaction.processed" ng-change="updateTransaction(transaction)"/>
                     </td>
 
                 </tr>
             </tbody>
-            <tfoot>
+            <tfoot class="print-display-none">
                 <tr>
                     <td colspan="100%">
                         <button class="pure-button full-width" ng-click="getMoreTransactions()" ng-disabled="searchDisabled">Load More</button>

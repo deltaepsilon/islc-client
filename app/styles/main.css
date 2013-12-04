@@ -29,6 +29,12 @@
 }
 
 /* line 64, main.scss */
+.print-clicked {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
+  opacity: 0.2;
+}
+
+/* line 68, main.scss */
 .rotate-90 {
   transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
@@ -40,7 +46,7 @@
   -ms-transform-origin: 50% 50%;
 }
 
-/* line 69, main.scss */
+/* line 73, main.scss */
 .rotate-180 {
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
@@ -52,7 +58,7 @@
   -ms-transform-origin: 50% 50%;
 }
 
-/* line 74, main.scss */
+/* line 78, main.scss */
 .rotate-270 {
   transform: rotate(270deg);
   -webkit-transform: rotate(270deg);
@@ -64,29 +70,29 @@
   -ms-transform-origin: 50% 50%;
 }
 
-/* line 79, main.scss */
+/* line 83, main.scss */
 .disabled {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
 }
 
-/* line 84, main.scss */
+/* line 88, main.scss */
 .gallery-view {
   background-color: white;
   box-sizing: border-box;
   padding: 1rem;
 }
-/* line 89, main.scss */
+/* line 93, main.scss */
 .gallery-view #gallery-image-placeholder {
   height: 400px;
 }
-/* line 93, main.scss */
+/* line 97, main.scss */
 .gallery-view #gallery-image-wrapper {
   min-height: 400px;
   min-width: 400px;
   position: relative;
 }
-/* line 99, main.scss */
+/* line 103, main.scss */
 .gallery-view #gallery-image {
   position: absolute;
   top: 0;
@@ -97,7 +103,7 @@
   max-height: 400px;
   max-width: 400px;
 }
-/* line 114, main.scss */
+/* line 118, main.scss */
 .gallery-view .zoomed {
   position: absolute !important;
   top: 2%;
@@ -108,12 +114,12 @@
   max-width: 96% !important;
   z-index: 1000;
 }
-/* line 124, main.scss */
+/* line 128, main.scss */
 .gallery-view .zoomed #gallery-image {
   max-height: inherit;
   max-width: inherit;
 }
-/* line 130, main.scss */
+/* line 134, main.scss */
 .gallery-view #gallery-comments-table {
   background-color: white;
 }

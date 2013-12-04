@@ -61,6 +61,10 @@ $white: #FFFFFF;
   float: left;
 }
 
+.print-clicked {
+  @include opacity(0.2);
+}
+
 .rotate-90 {
   @include rotate(90deg);
   @include centered;

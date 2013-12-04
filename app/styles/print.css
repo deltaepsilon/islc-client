@@ -1,0 +1,76 @@
+/* line 1, print.scss */
+.print-display-none, .print-clicked {
+  display: none !important;
+}
+
+/* line 5, print.scss */
+.print-hidden {
+  visibility: hidden !important;
+}
+
+/* line 9, print.scss */
+body {
+  color: black;
+  margin: 0;
+}
+
+/* line 14, print.scss */
+#layout {
+  padding: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0 !important;
+}
+
+/* line 24, print.scss */
+.header {
+  display: none;
+}
+
+/* line 28, print.scss */
+.content {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* line 39, print.scss */
+.print-label.pure-table {
+  border-width: 0 !important;
+}
+/* line 42, print.scss */
+.print-label.pure-table td, .print-label.pure-table th {
+  border: 1px solid black;
+  box-sizing: border-box;
+  height: 2.4cm;
+  width: 9.45cm;
+}
+/* line 53, print.scss */
+.print-label.pure-table-striped tr:nth-child(2n-1) td {
+  background-color: transparent !important;
+}
+/* line 59, print.scss */
+.print-label tr {
+  display: inline-block;
+}
+/* line 63, print.scss */
+.print-label td {
+  display: inline-block;
+}
+/* line 67, print.scss */
+.print-label .address-name {
+  display: block;
+}
+/* line 71, print.scss */
+.print-label .address-line1, .print-label .address-line3, .print-label .address-line3 {
+  display: block;
+}
+/* line 75, print.scss */
+.print-label .address-city {
+  display: block;
+}
+/* line 79, print.scss */
+.print-label .address-country {
+  display: block;
+}
