@@ -43,34 +43,39 @@ body {
 .print-label.pure-table td, .print-label.pure-table th {
   border-width: 0 !important;
   box-sizing: border-box;
-  height: 2.4cm;
+  padding: 0.3cm 0.5cm;
+  height: 2.38124cm;
   width: 9.45cm;
 }
-/* line 53, print.scss */
+/* line 54, print.scss */
 .print-label.pure-table-striped tr:nth-child(2n-1) td {
   background-color: transparent !important;
 }
-/* line 59, print.scss */
+/* line 60, print.scss */
 .print-label tr {
   display: inline-block;
 }
-/* line 63, print.scss */
+/* line 64, print.scss */
 .print-label td {
   display: inline-block;
 }
-/* line 67, print.scss */
+/* line 68, print.scss */
 .print-label .address-name {
   display: block;
+  text-transform: uppercase;
 }
-/* line 71, print.scss */
+/* line 73, print.scss */
 .print-label .address-line1, .print-label .address-line3, .print-label .address-line3 {
   display: block;
+  text-transform: uppercase;
 }
-/* line 75, print.scss */
+/* line 78, print.scss */
 .print-label .address-city {
   display: block;
+  text-transform: uppercase;
 }
-/* line 79, print.scss */
+/* line 83, print.scss */
 .print-label .address-country {
   display: block;
+  text-transform: uppercase;
 }
