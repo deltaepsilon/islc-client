@@ -90,6 +90,30 @@ angular.module('islcClientApp', ['ui.router', 'ngGrid', 'angular-markdown', 'ngS
           }
         }
 
+      })
+      .state('transactions', {
+        url: '/transactions',
+        views: {
+          body: {
+            templateUrl: 'views/transactions.html',
+            controller: 'TransactionsCtrl',
+            resolve: {
+              transactions: function (transactionService) {
+                var options = {
+                  page: 1,
+                  limit: 10,
+                  sort: 'l.id',
+                  direction: 'desc'
+                }
+                return {
+                  options: options,
+                  data: transactionService.getTransactions(options)
+                };
+              }
+            }
+          }
+        }
+
       });
 
     $locationProvider.html5Mode(true);

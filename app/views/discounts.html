@@ -1,90 +1,85 @@
-<div ng-controller="DrawerCtrl">
-    <!--ng-grid-->
-    <!--<div class="gridStyle" ng-grid="gridOptions"></div>-->
+<div class="header">
+    <h1>Discounts</h1>
+</div>
 
-    <div class="header">
-        <h1>Discounts</h1>
+<div class="content full-width pure-g-r">
+    <div class="pure-u-1" style="margin-right: auto;">
+        <table id="discounts-table" class="pure-table pure-table-striped full-width">
+            <thead class="uppercase">
+                <tr>
+                    <th>row</th>
+                    <th>id</th>
+                    <th>code</th>
+                    <th>expires</th>
+                    <th>uses</th>
+                    <th>max uses</th>
+                    <th>value</th>
+                    <th>percentage</th>
+                    <th>created</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td contenteditable="true" ng-model="filter.id"></td>
+                    <td contenteditable="true" ng-model="filter.code"></td>
+                    <td contenteditable="true" ng-model="filter.expires"></td>
+                    <td contenteditable="true" ng-model="filter.uses"></td>
+                    <td contenteditable="true" ng-model="filter.max_uses"></td>
+                    <td contenteditable="true" ng-model="filter.value"></td>
+                    <td contenteditable="true" ng-model="filter.percentage"></td>
+                    <td contenteditable="true" ng-model="filter.created"></td>
+                    <td></td>
+                </tr>
+                <tr class="animate-repeat row-{{ $index }}" ng-repeat="discount in discounts | filter:discountFilter">
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ discount.id }}</td>
+                    <td contenteditable="true" ng-model="discount.code" ng-change="updateDiscount(discount)">{{ discount.code }}</td>
+                    <td contenteditable="true" ng-model="discount.expires" ng-change="updateDiscount(discount)">{{ discount.expires }}</td>
+                    <td contenteditable="true" ng-model="discount.uses" ng-change="updateDiscount(discount)">{{ discount.uses }}</td>
+                    <td contenteditable="true" ng-model="discount.max_uses" ng-change="updateDiscount(discount)">{{ discount.max_uses }}</td>
+                    <td contenteditable="true" ng-model="discount.value" ng-change="updateDiscount(discount)">{{ discount.value }}</td>
+                    <td contenteditable="true" ng-model="discount.percentage" ng-change="updateDiscount(discount)">{{ discount.percentage }}</td>
+                    <td>{{ discount.created }}</td>
+                    <td class="cursor-hand" ng-click="deleteDiscount(discount)" qv-disable=".row-{{ $index }}">DELETE</td>
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <input type="number" ng-model="newDiscount.expires" placeholder="Expires..."/>
+                    </td>
+                    <td>
+                        <input type="number" ng-model="newDiscount.uses" placeholder="Uses..."/>
+                    </td>
+                    <td>
+                        <input type="number" ng-model="newDiscount.max_uses" placeholder="Max Uses..."/>
+                    </td>
+                    <td>
+                        <input type="number" ng-model="newDiscount.value" placeholder="Value..."/>
+                    </td>
+                    <td>
+                        <input type="number" ng-model="newDiscount.percentage" placeholder="Percentage..."/>
+                    </td>
+                    <td>
+                        <input type="number" ng-model="multiple" placeholder="Multiples?"/>
+                    </td>
+                    <td>
+                        <button class="pure-button full-width" ng-click="createDiscount(newDiscount, multiple)">CREATE</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="100%">
+                        <!--<button class="pure-button full-width" ng-click="getMoreComments()" ng-disabled="searchDisabled">Load More</button>-->
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
     </div>
 
-    <div class="content full-width pure-g-r">
-        <div style="margin-right: auto;" ng-class="{'pure-u-3-5': showDrawer, 'pure-u-1': hideDrawer}">
-            <table id="discounts-table" class="pure-table pure-table-striped full-width">
-                <thead class="uppercase">
-                    <tr>
-                        <th>row</th>
-                        <th>id</th>
-                        <th>code</th>
-                        <th>expires</th>
-                        <th>uses</th>
-                        <th>max uses</th>
-                        <th>value</th>
-                        <th>percentage</th>
-                        <th>created</th>
-                        <th>action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td contenteditable="true" ng-model="filter.id"></td>
-                        <td contenteditable="true" ng-model="filter.code"></td>
-                        <td contenteditable="true" ng-model="filter.expires"></td>
-                        <td contenteditable="true" ng-model="filter.uses"></td>
-                        <td contenteditable="true" ng-model="filter.max_uses"></td>
-                        <td contenteditable="true" ng-model="filter.value"></td>
-                        <td contenteditable="true" ng-model="filter.percentage"></td>
-                        <td contenteditable="true" ng-model="filter.created"></td>
-                        <td></td>
-                    </tr>
-                    <tr class="animate-repeat row-{{ $index }}" ng-repeat="discount in discounts | filter:discountFilter">
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ discount.id }}</td>
-                        <td contenteditable="true" ng-model="discount.code" ng-change="updateDiscount(discount)">{{ discount.code }}</td>
-                        <td contenteditable="true" ng-model="discount.expires" ng-change="updateDiscount(discount)">{{ discount.expires }}</td>
-                        <td contenteditable="true" ng-model="discount.uses" ng-change="updateDiscount(discount)">{{ discount.uses }}</td>
-                        <td contenteditable="true" ng-model="discount.max_uses" ng-change="updateDiscount(discount)">{{ discount.max_uses }}</td>
-                        <td contenteditable="true" ng-model="discount.value" ng-change="updateDiscount(discount)">{{ discount.value }}</td>
-                        <td contenteditable="true" ng-model="discount.percentage" ng-change="updateDiscount(discount)">{{ discount.percentage }}</td>
-                        <td>{{ discount.created }}</td>
-                        <td class="cursor-hand" ng-click="deleteDiscount(discount)" qv-disable=".row-{{ $index }}">DELETE</td>
-
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <input type="number" ng-model="newDiscount.expires" placeholder="Expires..."/>
-                        </td>
-                        <td>
-                            <input type="number" ng-model="newDiscount.uses" placeholder="Uses..."/>
-                        </td>
-                        <td>
-                            <input type="number" ng-model="newDiscount.max_uses" placeholder="Max Uses..."/>
-                        </td>
-                        <td>
-                            <input type="number" ng-model="newDiscount.value" placeholder="Value..."/>
-                        </td>
-                        <td>
-                            <input type="number" ng-model="newDiscount.percentage" placeholder="Percentage..."/>
-                        </td>
-                        <td>
-                            <input type="number" ng-model="multiple" placeholder="Multiples?"/>
-                        </td>
-                        <td>
-                            <button class="pure-button full-width" ng-click="createDiscount(newDiscount, multiple)">CREATE</button>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="100%">
-                            <!--<button class="pure-button full-width" ng-click="getMoreComments()" ng-disabled="searchDisabled">Load More</button>-->
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-
-    </div>
 </div>
