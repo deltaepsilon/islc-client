@@ -1,24 +1,34 @@
-.pure-g-r {
-  letter-spacing: inherit !important; }
-
+/* line 38, main.scss */
 .content {
-  padding-top: 25px; }
+  padding-top: 25px;
+}
 
+/* line 42, main.scss */
 .full-width {
-  width: 100% !important; }
+  width: 100% !important;
+}
 
+/* line 46, main.scss */
 .uppercase {
-  text-transform: uppercase; }
+  text-transform: uppercase;
+}
 
+/* line 51, main.scss */
 .cursor-hand:hover {
-  cursor: pointer; }
+  cursor: pointer;
+}
 
+/* line 56, main.scss */
 .right {
-  float: right; }
+  float: right;
+}
 
+/* line 60, main.scss */
 .left {
-  float: left; }
+  float: left;
+}
 
+/* line 64, main.scss */
 .rotate-90 {
   transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
@@ -27,8 +37,10 @@
   transform-origin: 50% 50%;
   -webkit-transform-origin: 50% 50%;
   -moz-transform-origin: 50% 50%;
-  -ms-transform-origin: 50% 50%; }
+  -ms-transform-origin: 50% 50%;
+}
 
+/* line 69, main.scss */
 .rotate-180 {
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
@@ -37,8 +49,10 @@
   transform-origin: 50% 50%;
   -webkit-transform-origin: 50% 50%;
   -moz-transform-origin: 50% 50%;
-  -ms-transform-origin: 50% 50%; }
+  -ms-transform-origin: 50% 50%;
+}
 
+/* line 74, main.scss */
 .rotate-270 {
   transform: rotate(270deg);
   -webkit-transform: rotate(270deg);
@@ -47,38 +61,59 @@
   transform-origin: 50% 50%;
   -webkit-transform-origin: 50% 50%;
   -moz-transform-origin: 50% 50%;
-  -ms-transform-origin: 50% 50%; }
+  -ms-transform-origin: 50% 50%;
+}
 
+/* line 79, main.scss */
+.disabled {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+}
+
+/* line 84, main.scss */
 .gallery-view {
   background-color: white;
   box-sizing: border-box;
-  padding: 1rem; }
-  .gallery-view #gallery-image-placeholder {
-    height: 400px; }
-  .gallery-view #gallery-image-wrapper {
-    min-height: 400px;
-    min-width: 400px;
-    position: relative; }
-  .gallery-view #gallery-image {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    max-height: 400px;
-    max-width: 400px; }
-  .gallery-view .zoomed {
-    position: absolute !important;
-    top: 2%;
-    right: 2%;
-    bottom: 2%;
-    left: 2%;
-    max-height: 96% !important;
-    max-width: 96% !important;
-    z-index: 1000; }
-    .gallery-view .zoomed #gallery-image {
-      max-height: inherit;
-      max-width: inherit; }
-  .gallery-view #gallery-comments-table {
-    background-color: white; }
+  padding: 1rem;
+}
+/* line 89, main.scss */
+.gallery-view #gallery-image-placeholder {
+  height: 400px;
+}
+/* line 93, main.scss */
+.gallery-view #gallery-image-wrapper {
+  min-height: 400px;
+  min-width: 400px;
+  position: relative;
+}
+/* line 99, main.scss */
+.gallery-view #gallery-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  max-height: 400px;
+  max-width: 400px;
+}
+/* line 114, main.scss */
+.gallery-view .zoomed {
+  position: absolute !important;
+  top: 2%;
+  right: 2%;
+  bottom: 2%;
+  left: 2%;
+  max-height: 96% !important;
+  max-width: 96% !important;
+  z-index: 1000;
+}
+/* line 124, main.scss */
+.gallery-view .zoomed #gallery-image {
+  max-height: inherit;
+  max-width: inherit;
+}
+/* line 130, main.scss */
+.gallery-view #gallery-comments-table {
+  background-color: white;
+}

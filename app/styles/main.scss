@@ -1,3 +1,7 @@
+@import "compass";
+@import "compass/css3/opacity";
+
+
 //Vars
 $dark-gray: #191818;
 $blue: #3b8bba;
@@ -28,11 +32,6 @@ $white: #FFFFFF;
   -webkit-transform-origin: 50% 50%;
   -moz-transform-origin: 50% 50%;
   -ms-transform-origin: 50% 50%;
-}
-
-//Pure Overrides
-.pure-g-r {
-  letter-spacing: inherit !important;
 }
 
 //Objects
@@ -75,6 +74,10 @@ $white: #FFFFFF;
 .rotate-270 {
   @include rotate(270deg);
   @include centered;
+}
+
+.disabled {
+  @include opacity(0.5);
 }
 
 //Implementations

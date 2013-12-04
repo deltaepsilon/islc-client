@@ -29,6 +29,7 @@ module.exports = function (grunt) {
   } catch (e) {}
 
   grunt.initConfig({
+    appConfig: grunt.file.readJSON('./config/appConfig.json'),
     yeoman: yeomanConfig,
     watch: {
       coffee: {
@@ -39,9 +40,9 @@ module.exports = function (grunt) {
         files: ['test/spec/{,*/}*.coffee'],
         tasks: ['coffee:test']
       },
-      styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css', '<%= yeoman.app %>/styles/{,*/}*.scss'],
-        tasks: ['sass:app', 'copy:styles', 'autoprefixer']
+      compass: {
+        files: ['<%= yeoman.app %>/styles/fonts.css', '<%= yeoman.app %>/styles/baby-blue.css', '<%= yeoman.app %>/styles/{,*/}*.scss'],
+        tasks: ['compass:app', 'copy:styles', 'autoprefixer']
       },
       livereload: {
         options: {
@@ -316,13 +317,18 @@ module.exports = function (grunt) {
         }
       }
     },
-    sass: {
+    compass: {
       app: {
         options: {
-
-        },
-        files: {
-          'app/styles/main.css': 'app/styles/main.scss'
+          cssDir         : '<%= appConfig.app.src %>/<%= appConfig.app.assets.styles %>',
+          fontsDir       : '<%= appConfig.app.src %>/<%= appConfig.app.assets.fonts %>',
+          httpFontsPath  : '../<%= appConfig.app.assets.fonts %>',
+          imagesDir      : '<%= appConfig.app.src %>/<%= appConfig.app.assets.images %>',
+          httpImagesPath : '../<%= appConfig.app.assets.images %>',
+          importPath     : '<%= appConfig.app.src %>/<%= appConfig.app.assets.lib %>',
+          javascriptsDir : '<%= appConfig.app.dev %>/<%= appConfig.app.assets.scripts %>',
+          sassDir        : '<%= appConfig.app.src %>/<%= appConfig.app.assets.styles %>',
+          httpGeneratedImagesPath : '../<%= appConfig.app.assets.images %>'
         }
       }
     }

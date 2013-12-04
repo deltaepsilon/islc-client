@@ -1,0 +1,25 @@
+{
+  "app": {
+    "ngModule" : "islcClient",
+
+    "dev"  : ".tmp",
+    "dist" : "dist",
+    "src"  : "app",
+    "test" : "test",
+
+    "assets": {
+      "bower"     : "bower_components",
+      "fonts"     : "fonts",
+      "images"    : "images",
+      "partials"  : "partials",
+      "scripts"   : "scripts",
+      "styles"    : "styles",
+      "templates" : "views"
+    },
+
+    "engines": {
+      "compass"      : true
+    }
+  }
+}
+

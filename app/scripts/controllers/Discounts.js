@@ -3,22 +3,38 @@
 angular.module('islcClientApp')
   .controller('DiscountsCtrl', function ($scope, discounts, discountService) {
     $scope.filter = {};
+    $scope.multiple = null;
 
     $scope.discounts = discounts;
 
-    $scope.create = function (discount, multiples) {
+    var updateDiscount = function (discount) {
+      var i = $scope.discounts.length;
+      while (i--) {
+        if ($scope.discounts[i].id === discount.id) {
+          $scope.discounts[i] = discount;
 
+        }
+      }
     };
 
-    $scope.updateDiscount = function (discount) {
-      discountService.update(discount).then(function (res) {
-        var i = $scope.discounts.length;
-        while (i--) {
-          if ($scope.discounts[i].id === res.id) {
-            $scope.discounts[i] = res;
-          }
-        }
+    $scope.createDiscount = function (discount, multiple) {
+      discountService.create(discount, multiple).then(function () {
+        discountService.get().then(function (discounts) {
+          $scope.discounts = discounts;
+        });
       });
+    };
+
+    $scope.deleteDiscount = function (discount) {
+      discountService.remove(discount).then(function () {
+        discountService.get().then(function (discounts) {
+          $scope.discounts = discounts;
+        });
+      });
+    }
+
+    $scope.updateDiscount = function (discount) {
+      discountService.update(discount).then(updateDiscount);
     };
 
     $scope.discountFilter = function (row) {
