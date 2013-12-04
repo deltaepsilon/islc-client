@@ -47,17 +47,17 @@
                     <td class="cursor-hand" ng-click="setUserFilter(transaction.user)" title="Filter by: {{ transaction.user.username }}">{{ transaction.user.username }}</td>
                     <td><a href="mailto:{{ transaction.user.email }}">{{ transaction.user.email }}</a></td>
                     <td>
-                        <div>{{ transaction.user.address.first }} {{ transaction.user.address.last }}</div>
-                        <div>{{ transaction.user.address.line1 }}</div>
-                        <div>{{ transaction.user.address.line2 }}</div>
-                        <div>{{ transaction.user.address.line3 }}</div>
-                        <div>{{ transaction.user.address.city }}, {{ transaction.user.address.state }} {{ transaction.user.address.code }}</div>
-                        <div>{{ transaction.user.address.country }}</div>
+                        <span>{{ transaction.user.address.first }} {{ transaction.user.address.last }}</span>
+                        <span>{{ transaction.user.address.line1 }}</span>
+                        <span>{{ transaction.user.address.line2 }}</span>
+                        <span>{{ transaction.user.address.line3 }}</span>
+                        <span ng-show="transaction.user.address">{{ transaction.user.address.city }}<span ng-show="transaction.user.address.city && (transaction.user.address.state || transaction.user.address.code)">,</span> {{ transaction.user.address.state }} {{ transaction.user.address.code }}</span>
+                        <span>{{ transaction.user.address.country }}</span>
                     </td>
                     <td>{{ transaction.user.address.instructions }}</td>
                     <td><span ng-show="transaction.discount_applied">-${{ transaction.discount_applied }}</span></td>
                     <td>
-                        <div ng-repeat="product in transaction.products">{{ product.title }}</div>
+                        <span ng-repeat="product in transaction.products">{{ product.title }}</span>
                     </td>
                     <td>${{ transaction.amount }}</td>
                     <td>{{ transaction.created | date }}</td>
