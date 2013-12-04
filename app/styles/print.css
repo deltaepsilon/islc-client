@@ -41,7 +41,7 @@ body {
 }
 /* line 42, print.scss */
 .print-label.pure-table td, .print-label.pure-table th {
-  border: 1px solid black;
+  border-width: 0 !important;
   box-sizing: border-box;
   height: 2.4cm;
   width: 9.45cm;
