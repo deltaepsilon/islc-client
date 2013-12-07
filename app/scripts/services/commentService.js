@@ -29,7 +29,7 @@ angular.module('islcClientApp')
       },
 
       updateComment: function (comment) {
-        return comment.put();
+        return Restangular.one('comment', comment.id).put(comment);
       },
 
       deleteComment: function (galleryID, comment) {

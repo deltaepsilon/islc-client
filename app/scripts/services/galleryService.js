@@ -23,7 +23,7 @@ angular.module('islcClientApp')
         return Restangular.one('gallery', id).get();
       },
       updateGallery: function (gallery) {
-        return gallery.put();
+        return Restangular.one('gallery', gallery.id).put(gallery);
       }
     }
 
