@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('islcClientApp')
-  .service('commentService', function commentService(Restangular, $sanitize) {
+  .service('commentService', function commentService(Restangular, $sanitize, $q) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     return {
       getComments: function (options) {
@@ -25,15 +25,24 @@ angular.module('islcClientApp')
           marked: false
         };
 
-        Restangular.one('gallery', gallerID).all('comment').put(comment)
+        return Restangular.one('gallery', galleryID).all('comment').post(comment)
       },
 
       updateComment: function (comment) {
         return comment.put();
       },
 
-      deleteComment: function (comment) {
-        return comment.remove();
+      deleteComment: function (galleryID, comment) {
+        var deferred = $q.defer();
+
+        Restangular.one('comment', comment.id).get().then(function (res) {
+          res.remove().then(function (res) {
+            deferred.resolve(res);
+          });
+
+        });
+
+        return deferred.promise;
 
       },
 

@@ -94,7 +94,7 @@ angular.module('islcClientApp')
     };
 
     $scope.showGallery = function (id) {
-      galleryService.getGallery(id).then(function (gallery) {
+      galleryService.get(id).then(function (gallery) {
         $scope.gallery = commentService.scrubGalleryComments(gallery);
         $scope.toggleGallery(true);
       });

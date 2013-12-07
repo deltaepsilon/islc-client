@@ -76,7 +76,9 @@
             </div>
         </nav>
 
-        <div class="pure-u-1" ui-view="body"></div>
+        <div  ng-controller="DrawerCtrl">
+            <div class="pure-u-1" ui-view="body"></div>
+        </div>
     </div>
 
         <!-- build:js scripts/modules.js -->

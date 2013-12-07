@@ -1,64 +1,59 @@
-<div ng-controller="DrawerCtrl">
-    <!--ng-grid-->
-    <!--<div class="gridStyle" ng-grid="gridOptions"></div>-->
+<div class="header">
+    <h1>Galleries</h1>
+</div>
 
-    <div class="header">
-        <h1>Galleries</h1>
+<div class="content full-width pure-g-r">
+    <form class="pure-form pure-u-1">
+        <legend>Search Galleries</legend>
+        <fieldset>
+            <label for="gallery-filter">Filter By:</label>
+            <select name="gallery-filter" id="gallery-filter" ng-model="galleries.options.filter.column" ng-options="k as v for (k, v) in search.filters"></select>
+            <input type="search" ng-model="galleries.options.filter.text" placeholder="Filter text"/>
+
+            <label for="gallery-sort">Order by:</label>
+            <select name="gallery-sort" id="gallery-sort" ng-model="galleries.options.sort" ng-options="k as v for (k, v) in search.sorts"></select>
+            <select name="gallery-sort-direction" id="gallery-sort-direction" ng-model="galleries.options.direction" ng-options="k as v for (k, v) in search.directions"></select>
+
+            <label for="options-limit">Limit results:</label>
+            <input id="options-limit" type="integer" ng-model="galleries.options.limit"/>
+
+            <button class="pure-button pure-button-primary" ng-click="searchGalleries(false)" ng-disabled="searchDisabled">Search</button>
+        </fieldset>
+        <hr>
+    </form>
+
+    <div style="margin-right: auto;" ng-class="{'pure-u-3-5': showDrawer, 'pure-u-1': hideDrawer}">
+        <table id="galleries-table" class="pure-table pure-table-striped full-width">
+            <thead class="uppercase">
+            <tr>
+                <th>row</th> <th>id</th> <th>user</th> <th>title</th> <th>updated</th> <th>done</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="animate-repeat" ng-repeat="gallery in galleries.data">
+                <td class="cursor-hand" ng-click="showGallery(gallery)">{{ $index + 1 }}</td>
+                <td class="cursor-hand" ng-click="showGallery(gallery)">{{ gallery.id }}</td>
+                <td class="cursor-hand" ng-click="setUserFilter(gallery.user)" title="Filter by: {{ gallery.user.username }}">{{ gallery.user.username }}</td>
+                <td class="cursor-hand" ng-click="showGallery(gallery)">{{ gallery.title }}</td>
+                <td class="cursor-hand" ng-click="showGallery(gallery)">{{ gallery.updated | date:'MM/dd/yyyy' }}</td>
+                <td><input
+                        type="checkbox"
+                        ng-model="gallery.marked"
+                        ng-checked="{{ gallery.marked }}"
+                        ng-change="updateGallery(gallery)"
+                        /></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="100%">
+                    <button class="pure-button full-width" ng-click="getMoreGalleries()" ng-disabled="searchDisabled">Load More</button>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
     </div>
 
-    <div class="content full-width pure-g-r">
-        <form class="pure-form pure-u-1">
-            <legend>Search Galleries</legend>
-            <fieldset>
-                <label for="gallery-filter">Filter By:</label>
-                <select name="gallery-filter" id="gallery-filter" ng-model="galleries.options.filter.column" ng-options="k as v for (k, v) in search.filters"></select>
-                <input type="search" ng-model="galleries.options.filter.text" placeholder="Filter text"/>
+    <div class="pure-u-2-5 right" qv-gallery-viewer="gallery" ng-show="showDrawer" close="closeGallery"></div>
 
-                <label for="gallery-sort">Order by:</label>
-                <select name="gallery-sort" id="gallery-sort" ng-model="galleries.options.sort" ng-options="k as v for (k, v) in search.sorts"></select>
-                <select name="gallery-sort-direction" id="gallery-sort-direction" ng-model="galleries.options.direction" ng-options="k as v for (k, v) in search.directions"></select>
-
-                <label for="options-limit">Limit results:</label>
-                <input id="options-limit" type="integer" ng-model="galleries.options.limit"/>
-
-                <button class="pure-button pure-button-primary" ng-click="searchGalleries(false)" ng-disabled="searchDisabled">Search</button>
-            </fieldset>
-            <hr>
-        </form>
-
-        <div style="margin-right: auto;" ng-class="{'pure-u-3-5': showDrawer, 'pure-u-1': hideDrawer}">
-            <table id="galleries-table" class="pure-table pure-table-striped full-width">
-                <thead class="uppercase">
-                <tr>
-                    <th>row</th> <th>id</th> <th>user</th> <th>title</th> <th>updated</th> <th>done</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="animate-repeat" ng-repeat="gallery in galleries.data">
-                    <td class="cursor-hand" ng-click="showGallery(gallery)">{{ $index + 1 }}</td>
-                    <td class="cursor-hand" ng-click="showGallery(gallery)">{{ gallery.id }}</td>
-                    <td class="cursor-hand" ng-click="setUserFilter(gallery.user)" title="Filter by: {{ gallery.user.username }}">{{ gallery.user.username }}</td>
-                    <td class="cursor-hand" ng-click="showGallery(gallery)">{{ gallery.title }}</td>
-                    <td class="cursor-hand" ng-click="showGallery(gallery)">{{ gallery.updated | date:'MM/dd/yyyy' }}</td>
-                    <td><input
-                            type="checkbox"
-                            ng-model="gallery.marked"
-                            ng-checked="{{ gallery.marked }}"
-                            ng-change="updateGallery(gallery)"
-                            /></td>
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="100%">
-                        <button class="pure-button full-width" ng-click="getMoreGalleries()" ng-disabled="searchDisabled">Load More</button>
-                    </td>
-                </tr>
-                </tfoot>
-            </table>
-        </div>
-
-        <div class="pure-u-2-5 right" qv-gallery-viewer="gallery" ng-show="showDrawer" close="closeGallery"></div>
-
-    </div>
 </div>

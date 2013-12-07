@@ -34,10 +34,10 @@ angular.module('islcClientApp')
           });
         };
 
-        $scope.deleteComment = function (id) {
-          commentService.deleteComment(id).then(function (data) {
-            if (data && data.id && parseInt(data.id, 10) === id) {
-              galleryService.getGallery($scope.gallery.id).then(function (gallery) {
+        $scope.deleteComment = function (galleryID, comment) {
+          commentService.deleteComment(galleryID, comment).then(function (data) {
+            if (data && data.id && parseInt(data.id, 10) === comment.id) {
+              galleryService.get($scope.gallery.id).then(function (gallery) {
                 $scope.gallery = $scope.gallery = commentService.scrubGalleryComments(gallery);
               });
             } else {
