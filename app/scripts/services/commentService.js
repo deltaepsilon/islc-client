@@ -2,7 +2,8 @@
 
 angular.module('islcClientApp')
   .service('commentService', function commentService(Restangular, $sanitize, $q) {
-    // AngularJS will instantiate a singleton by calling "new" on this function
+    var LINEFEED_REGEX = /&#10;/g;
+
     return {
       getComments: function (options) {
         var newOptions = _.clone(options) || {};
@@ -51,6 +52,7 @@ angular.module('islcClientApp')
 
         while (i--) {
           gallery.comments[i].comment = $sanitize(gallery.comments[i].comment);
+          gallery.comments[i].comment = gallery.comments[i].comment.replace(LINEFEED_REGEX, "\n");
         }
         return gallery;
       }
