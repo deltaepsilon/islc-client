@@ -1,3 +1,4 @@
+require('newrelic');
 var express = require('express'),
   fs = require('fs'),
   AWS = require('aws-sdk'),
