@@ -114,6 +114,21 @@ angular.module('islcClientApp', ['ui.router', 'ngGrid', 'angular-markdown', 'ngS
           }
         }
 
+      })
+      .state('files', {
+        url: '/files',
+        views: {
+          body: {
+            templateUrl: 'views/files.html',
+            controller: 'FilesCtrl',
+            resolve: {
+              files: function (filesService) {
+                return filesService.get();
+              }
+            }
+          }
+        }
+
       });
 
     $locationProvider.html5Mode(true);

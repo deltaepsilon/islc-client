@@ -116,6 +116,7 @@ app.get('/galleries', returnIndex);
 app.get('/comments', returnIndex);
 app.get('/discounts', returnIndex);
 app.get('/transactions', returnIndex);
+app.get('/files', returnIndex);
 
 /**
  * Serve static files

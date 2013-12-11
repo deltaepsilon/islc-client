@@ -1,0 +1,33 @@
+<div class="header">
+    <h1>Files</h1>
+</div>
+
+<div class="content full-width pure-g-r">
+    <div class="pure-u-1" style="margin-right: auto;">
+        <table id="discounts-table" class="pure-table pure-table-striped full-width">
+            <thead class="uppercase">
+                <tr>
+                    <th>row</th>
+                    <th>filename</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="animate-repeat row-{{ $index }}" ng-repeat="file in files">
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ file }}</td>
+                    <td class="cursor-hand" ng-click="secureFile(file)" qv-disable=".row-{{ $index }}">Secure</td>
+
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="100%">
+                        <!--<button class="pure-button full-width" ng-click="getMoreComments()" ng-disabled="searchDisabled">Load More</button>-->
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>

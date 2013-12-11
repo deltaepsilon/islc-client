@@ -52,7 +52,7 @@
         </a>
         <nav class="pure-u-1 active print-display-none" id="menu" qv-active="qv-active-route|pure-menu-selected">
             <div class="pure-menu pure-menu-open">
-                <a class="pure-menu-heading" href="/">Pure</a>
+                <a class="pure-menu-heading" href="/">ISLC Client</a>
 
                 <ul>
 
@@ -70,6 +70,10 @@
 
                     <li qv-active-route="/transactions">
                         <a ui-sref="transactions">Transactions</a>
+                    </li>
+
+                    <li qv-active-route="/files">
+                        <a ui-sref="files">Files</a>
                     </li>
 
                 </ul>
@@ -117,6 +121,8 @@
         <script src="scripts/controllers/Transactions.js"></script>
         <script src="scripts/services/transactionService.js"></script>
         <script src="scripts/directives/qvClickTarget.js"></script>
+        <script src="scripts/controllers/Files.js"></script>
+        <script src="scripts/services/filesService.js"></script>
         <!-- endbuild -->
 </body>
 </html>
