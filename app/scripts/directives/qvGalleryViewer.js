@@ -23,8 +23,8 @@ angular.module('islcClientApp')
           commentService.addComment(gallery.id, newComment).then(function (comment) {
             $scope.commentDisabled = false;
             $scope.newComment = null;
-            comment.comment = $sanitize(comment.comment);
             $scope.gallery.comments.push(comment);
+            $scope.gallery = commentService.scrubGalleryComments($scope.gallery);
           });
 
         };
