@@ -36,6 +36,7 @@
                     <th>discount</th>
                     <th>products</th>
                     <th>amount</th>
+                    <th>Survey</th>
                     <th>created</th>
                     <th>processed</th>
                 </tr>
@@ -60,6 +61,11 @@
                         <span ng-repeat="product in transaction.products">{{ product.title }}</span>
                     </td>
                     <td class="print-display-none cursor-hand" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">${{ transaction.amount }}</td>
+                    <td class="print-display-none">
+                        <ul>
+                            <li ng-repeat="(key, value) in transaction.survey">{{ key }}: {{ value }}</li>
+                        </ul>
+                    </td>
                     <td class="print-display-none cursor-hand" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">{{ transaction.created | date }}</td>
                     <td class="print-display-none">
                         <input type="checkbox" ng-model="transaction.processed" ng-change="updateTransaction(transaction)"/>
