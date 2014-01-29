@@ -17,8 +17,8 @@ var express = require('express'),
     production: {
       env: 'prod',
       root: '/app',
-      islc: 'http://istilllovecalligraphy.com',
-      api: 'http://istilllovecalligraphy.com/api'
+      islc: 'https://istilllovecalligraphy.com',
+      api: 'https://istilllovecalligraphy.com/api'
     }
   },
   fileRoot = __dirname + angularEnvVars[environment].root;
