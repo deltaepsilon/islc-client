@@ -34,7 +34,9 @@
         <hr>
     </form>
 
-    <div class="left" style="margin-right: auto;" ng-class="{'large-8': showDrawer, 'small-12': hideDrawer}">
+    <div class="large-4 medium-12 right" qv-gallery-viewer="gallery" ng-show="showDrawer" close="toggleGallery"></div>
+
+    <div class="left" style="margin-right: auto;" ng-class="{'large-8 medium-12': showDrawer, 'small-12': hideDrawer}">
         <table id="comments-table" class="small-12">
             <thead class="uppercase">
             <tr>
@@ -65,7 +67,5 @@
             </tfoot>
         </table>
     </div>
-
-    <div class="small-4 right" qv-gallery-viewer="gallery" ng-show="showDrawer" close="toggleGallery"></div>
 
 </div>
