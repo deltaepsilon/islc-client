@@ -2,29 +2,41 @@
     <h1>Transactions</h1>
 </div>
 
-<div class="content full-width pure-g-r">
-    <form class="pure-form pure-u-1 print-display-none">
+<div class="content">
+    <form class="print-display-none">
         <legend>Search Transactions</legend>
         <fieldset>
-            <label for="transaction-filter">Filter By:</label>
-            <select name="transaction-filter" id="transaction-filter" ng-model="transactions.options.filter.column" ng-options="k as v for (k, v) in search.filters"></select>
-            <input type="search" ng-model="transactions.options.filter.text" placeholder="Filter text"/>
+            <div class="row">
+                <div class="small-12 medium-6 column">
+                    <label for="transaction-filter">Filter By:</label>
+                    <select name="transaction-filter" id="transaction-filter" ng-model="transactions.options.filter.column" ng-options="k as v for (k, v) in search.filters"></select>
+                    <input type="search" ng-model="transactions.options.filter.text" placeholder="Filter text"/>
+                </div>
 
-            <label for="transaction-sort">Order by:</label>
-            <select name="transaction-sort" id="transaction-sort" ng-model="transactions.options.sort" ng-options="k as v for (k, v) in search.sorts"></select>
-            <select name="transaction-sort-direction" id="transaction-sort-direction" ng-model="transactions.options.direction" ng-options="k as v for (k, v) in search.directions"></select>
+                <div class="small-12 medium-6 column">
+                    <label for="transaction-sort">Order by:</label>
+                    <select name="transaction-sort" id="transaction-sort" ng-model="transactions.options.sort" ng-options="k as v for (k, v) in search.sorts"></select>
+                    <select name="transaction-sort-direction" id="transaction-sort-direction" ng-model="transactions.options.direction" ng-options="k as v for (k, v) in search.directions"></select>
+                </div>
 
-            <label for="options-limit">Limit results:</label>
-            <input id="options-limit" type="integer" ng-model="transactions.options.limit"/>
+                <div class="small-12 medium-6 column">
+                    <label for="options-limit">Limit results:</label>
+                    <input id="options-limit" type="number" ng-model="transactions.options.limit"/>
+                </div>
 
-            <button class="pure-button pure-button-primary" ng-click="searchTransactions(false)" ng-disabled="searchDisabled">Search</button>
+                <div class="small-12 medium-6 column">
+                    <label>&nbsp;</label>
+                    <button ng-click="searchTransactions(false)" ng-disabled="searchDisabled">Search</button>
+                </div>
+            </div>
+
         </fieldset>
         <hr>
     </form>
 
 
-    <div class="pure-u-1" style="margin-right: auto;">
-        <table id="discounts-table" class="pure-table pure-table-striped full-width print-label">
+    <div style="margin-right: auto;">
+        <table id="discounts-table" class="small-12 print-label">
             <thead class="uppercase print-display-none">
                 <tr>
                     <th>row</th>
@@ -43,9 +55,9 @@
             </thead>
             <tbody>
                 <tr class="animate-repeat row-{{ $index }}" ng-repeat="transaction in transactions.data.items">
-                    <td class="print-display-none cursor-hand" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">{{ $index + 1 }}</td>
-                    <td class="print-display-none cursor-hand" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">{{ transaction.id }}</td>
-                    <td class="print-display-none cursor-hand" ng-click="setUserFilter(transaction.user)" title="Filter by: {{ transaction.user.username }}">{{ transaction.user.username }}</td>
+                    <td class="print-display-none pointer" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">{{ $index + 1 }}</td>
+                    <td class="print-display-none pointer" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">{{ transaction.id }}</td>
+                    <td class="print-display-none pointer" ng-click="setUserFilter(transaction.user)" title="Filter by: {{ transaction.user.username }}">{{ transaction.user.username }}</td>
                     <td class="print-display-none"><a href="mailto:{{ transaction.user.email }}">{{ transaction.user.email }}</a></td>
                     <td>
                         <span class="address-name">{{ transaction.user.address.first }} {{ transaction.user.address.last }}</span>
@@ -55,18 +67,18 @@
                         <span class="address-city" ng-show="transaction.user.address">{{ transaction.user.address.city }}<span ng-show="transaction.user.address.city && (transaction.user.address.state || transaction.user.address.code)">,</span> {{ transaction.user.address.state }} {{ transaction.user.address.code }}</span>
                         <span class="address-country">{{ transaction.user.address.country }}</span>
                     </td>
-                    <td class="print-display-none cursor-hand" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">{{ transaction.user.address.instructions }}</td>
-                    <td class="print-display-none cursor-hand" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked"><span ng-show="transaction.discount_applied">-${{ transaction.discount_applied }}</span></td>
-                    <td class="print-display-none cursor-hand" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">
+                    <td class="print-display-none pointer" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">{{ transaction.user.address.instructions }}</td>
+                    <td class="print-display-none pointer" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked"><span ng-show="transaction.discount_applied">-${{ transaction.discount_applied }}</span></td>
+                    <td class="print-display-none pointer" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">
                         <span ng-repeat="product in transaction.products">{{ product.title }}</span>
                     </td>
-                    <td class="print-display-none cursor-hand" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">${{ transaction.amount }}</td>
+                    <td class="print-display-none pointer" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">${{ transaction.amount }}</td>
                     <td class="print-display-none">
                         <ul>
                             <li ng-repeat="(key, value) in transaction.survey">{{ key }}: {{ value }}</li>
                         </ul>
                     </td>
-                    <td class="print-display-none cursor-hand" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">{{ transaction.created | date }}</td>
+                    <td class="print-display-none pointer" qv-click-target=".row-{{ $index }}" qv-click-class="print-clicked">{{ transaction.created | date }}</td>
                     <td class="print-display-none">
                         <input type="checkbox" ng-model="transaction.processed" ng-change="updateTransaction(transaction)"/>
                     </td>
@@ -75,8 +87,8 @@
             </tbody>
             <tfoot class="print-display-none">
                 <tr>
-                    <td colspan="100%">
-                        <button class="pure-button full-width" ng-click="getMoreTransactions()" ng-disabled="searchDisabled">Load More</button>
+                    <td colspan="12">
+                        <button ng-click="getMoreTransactions()" ng-disabled="searchDisabled">Load More</button>
                     </td>
                 </tr>
             </tfoot>

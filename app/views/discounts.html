@@ -2,9 +2,9 @@
     <h1>Discounts</h1>
 </div>
 
-<div class="content full-width pure-g-r">
-    <div class="pure-u-1" style="margin-right: auto;">
-        <table id="discounts-table" class="pure-table pure-table-striped full-width">
+<div class="content">
+    <div style="margin-right: auto;">
+        <table id="discounts-table" class="small-12">
             <thead class="uppercase">
                 <tr>
                     <th>row</th>
@@ -42,7 +42,7 @@
                     <td contenteditable="true" ng-model="discount.value" ng-change="updateDiscount(discount)">{{ discount.value }}</td>
                     <td contenteditable="true" ng-model="discount.percentage" ng-change="updateDiscount(discount)">{{ discount.percentage }}</td>
                     <td>{{ discount.created }}</td>
-                    <td class="cursor-hand" ng-click="deleteDiscount(discount)" qv-disable=".row-{{ $index }}">DELETE</td>
+                    <td class="pointer" ng-click="deleteDiscount(discount)" qv-disable=".row-{{ $index }}">DELETE</td>
 
                 </tr>
                 <tr>
@@ -68,13 +68,13 @@
                         <input type="number" ng-model="multiple" placeholder="Multiples?"/>
                     </td>
                     <td>
-                        <button class="pure-button full-width" ng-click="createDiscount(newDiscount, multiple)">CREATE</button>
+                        <button class="tiny" ng-click="createDiscount(newDiscount, multiple)">CREATE</button>
                     </td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="100%">
+                    <td colspan="10">
                         <!--<button class="pure-button full-width" ng-click="getMoreComments()" ng-disabled="searchDisabled">Load More</button>-->
                     </td>
                 </tr>

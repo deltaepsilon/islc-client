@@ -12,13 +12,15 @@ var express = require('express'),
       env: 'dev',
       root: '/app',
       islc: 'https://calligraphy.quiver.is',
-      api: 'https://calligraphy.quiver.is/api'
+      api: 'https://calligraphy.quiver.is/api',
+      firebase: 'dev-quiver.firebaseIO.com'
     },
     production: {
       env: 'prod',
       root: '/app',
       islc: 'https://istilllovecalligraphy.com',
-      api: 'https://istilllovecalligraphy.com/api'
+      api: 'https://istilllovecalligraphy.com/api',
+      firebase: 'quiver.firebaseIO.com'
     }
   },
   fileRoot = __dirname + angularEnvVars[environment].root;
@@ -40,6 +42,10 @@ app.get('*',function (req, res, next) {
   if (req.param('access_token')) {
     req.session.access_token = req.param('access_token');
   }
+
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Headers', req.headers['access-control-request-headers']); // Allow whatever they're asking for
+
   next();
 });
 
@@ -117,6 +123,7 @@ app.get('/comments', returnIndex);
 app.get('/discounts', returnIndex);
 app.get('/transactions', returnIndex);
 app.get('/files', returnIndex);
+app.get('/announcements', returnIndex);
 
 /**
  * Serve static files

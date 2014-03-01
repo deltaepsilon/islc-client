@@ -15,13 +15,18 @@
     "jquery": "~2.0.3",
     "angular-markdown": "~0.0.1",
     "restangular": "~1.1.8",
-    "angular-ui-router": "~0.2.0"
+    "angular-ui-router": "~0.2.0",
+    "firebase": "~1.0.10",
+    "angularfire": "~0.7.0",
+    "foundation": "~5.1.1",
+    "foundation-icon-fonts": "https://github.com/deltaepsilon/foundation-icon-fonts.git",
+    "angular-notifications": "https://github.com/deltaepsilon/angular-notifications.git#master"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.7",
     "angular-scenario": "~1.0.7"
   },
   "resolutions": {
-    "angular": "1.2.3"
+    "angular": "~1.0.7"
   }
 }

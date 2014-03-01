@@ -41,7 +41,7 @@ module.exports = function (grunt) {
         tasks: ['coffee:test']
       },
       compass: {
-        files: ['<%= yeoman.app %>/styles/fonts.css', '<%= yeoman.app %>/styles/baby-blue.css', '<%= yeoman.app %>/styles/{,*/}*.scss'],
+        files: ['<%= yeoman.app %>/styles/{,*/}*.scss'],
         tasks: ['compass:app', 'copy:styles', 'autoprefixer']
       },
       livereload: {

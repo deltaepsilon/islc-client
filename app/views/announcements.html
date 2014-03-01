@@ -1,28 +1,30 @@
 <div class="header">
-    <h1>Files</h1>
+    <h1>Announcements</h1>
 </div>
 
-<div class="content">
-    <div style="margin-right: auto;">
-        <table id="discounts-table">
+        {{ announcements }}
+
+<div class="content full-width pure-g-r">
+    <div class="pure-u-1" style="margin-right: auto;">
+        <table id="announcements-table" class="pure-table pure-table-striped full-width">
             <thead class="uppercase">
                 <tr>
                     <th>row</th>
-                    <th>filename</th>
-                    <th>action</th>
+                    <th>date</th>
+                    <th>text</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="animate-repeat row-{{ $index }}" ng-repeat="file in files">
+                <tr class="animate-repeat row-{{ $index }}" ng-repeat="announcement in announcements">
                     <td>{{ $index + 1 }}</td>
-                    <td>{{ file }}</td>
-                    <td class="pointer" ng-click="secureFile(file)" qv-disable=".row-{{ $index }}">Secure</td>
+                    <td>{{ announcement.date | date }}</td>
+                    <td>{{ announcement.text }}</td>
 
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3">
+                    <td colspan="100%">
                         <!--<button class="pure-button full-width" ng-click="getMoreComments()" ng-disabled="searchDisabled">Load More</button>-->
                     </td>
                 </tr>

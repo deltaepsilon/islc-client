@@ -3,27 +3,39 @@
 </div>
 
 <div class="content full-width pure-g-r">
-    <form class="pure-form pure-u-1">
+    <form>
         <legend>Search Comments</legend>
         <fieldset>
-            <label for="comment-filter">Filter By:</label>
-            <select name="comment-filter" id="comment-filter" ng-model="comments.options.filter.column" ng-options="k as v for (k, v) in search.filters"></select>
-            <input type="search" ng-model="comments.options.filter.text" placeholder="Filter text"/>
+            <div class="row">
+                <div class="small-12 medium-6 column">
+                    <label for="comment-filter">Filter By:</label>
+                    <select name="comment-filter" id="comment-filter" ng-model="comments.options.filter.column" ng-options="k as v for (k, v) in search.filters"></select>
+                    <input type="search" ng-model="comments.options.filter.text" placeholder="Filter text"/>
+                </div>
 
-            <label for="comment-sort">Order by:</label>
-            <select name="comment-sort" id="comment-sort" ng-model="comments.options.sort" ng-options="k as v for (k, v) in search.sorts"></select>
-            <select name="comment-sort-direction" id="comment-sort-direction" ng-model="comments.options.direction" ng-options="k as v for (k, v) in search.directions"></select>
+                <div class="small-12 medium-6 column">
+                    <label for="comment-sort">Order by:</label>
+                    <select name="comment-sort" id="comment-sort" ng-model="comments.options.sort" ng-options="k as v for (k, v) in search.sorts"></select>
+                    <select name="comment-sort-direction" id="comment-sort-direction" ng-model="comments.options.direction" ng-options="k as v for (k, v) in search.directions"></select>
+                </div>
 
-            <label for="options-limit">Limit results:</label>
-            <input id="options-limit" type="integer" ng-model="comments.options.limit"/>
+                <div class="small-12 medium-6 column">
+                    <label for="options-limit">Limit results:</label>
+                    <input id="options-limit" type="number" ng-model="comments.options.limit"/>
+                </div>
 
-            <button class="pure-button pure-button-primary" ng-click="searchComments(false)" ng-disabled="searchDisabled">Search</button>
+                <div class="small-12 medium-6 column">
+                    <label>&nbsp;</label>
+                    <button ng-click="searchComments(false)" ng-disabled="searchDisabled">Search</button>
+                </div>
+            </div>
+
         </fieldset>
         <hr>
     </form>
 
-    <div style="margin-right: auto;" ng-class="{'pure-u-3-5': showDrawer, 'pure-u-1': hideDrawer}">
-        <table id="comments-table" class="pure-table pure-table-striped full-width">
+    <div class="left" style="margin-right: auto;" ng-class="{'large-4': showDrawer, 'small-12': hideDrawer}">
+        <table id="comments-table" class="small-12">
             <thead class="uppercase">
             <tr>
                 <th>row</th> <th>id</th> <th>user</th> <th>text</th> <th>updated</th> <th>done</th>
@@ -31,11 +43,11 @@
             </thead>
             <tbody>
             <tr class="animate-repeat" ng-repeat="comment in comments.data">
-                <td class="cursor-hand" ng-click="showGallery(comment.gallery.id)">{{ $index + 1 }}</td>
-                <td class="cursor-hand" ng-click="showGallery(comment.gallery.id)">{{ comment.id }}</td>
-                <td class="cursor-hand" ng-click="setUserFilter(comment.gallery.user)" title="Filter by: {{ comment.user.username }}">{{ comment.user.username }}</td>
-                <td class="cursor-hand" ng-click="showGallery(comment.gallery.id)">{{ comment.comment }}</td>
-                <td class="cursor-hand" ng-click="showGallery(comment.gallery.id)">{{ comment.updated | date:'MM/dd/yyyy' }}</td>
+                <td class="pointer" ng-click="showGallery(comment.gallery.id)">{{ $index + 1 }}</td>
+                <td class="pointer" ng-click="showGallery(comment.gallery.id)">{{ comment.id }}</td>
+                <td class="pointer" ng-click="setUserFilter(comment.gallery.user)" title="Filter by: {{ comment.user.username }}">{{ comment.user.username }}</td>
+                <td class="pointer" ng-click="showGallery(comment.gallery.id)">{{ comment.comment }}</td>
+                <td class="pointer" ng-click="showGallery(comment.gallery.id)">{{ comment.updated | date:'MM/dd/yyyy' }}</td>
                 <td><input
                         type="checkbox"
                         ng-model="comment.marked"
@@ -46,7 +58,7 @@
             </tbody>
             <tfoot>
             <tr>
-                <td colspan="100%">
+                <td colspan="6">
                     <button class="pure-button full-width" ng-click="getMoreComments()" ng-disabled="searchDisabled">Load More</button>
                 </td>
             </tr>
@@ -54,6 +66,6 @@
         </table>
     </div>
 
-    <div class="pure-u-2-5 right" qv-gallery-viewer="gallery" ng-show="showDrawer" close="toggleGallery"></div>
+    <div class="small-8 right" qv-gallery-viewer="gallery" ng-show="showDrawer" close="toggleGallery"></div>
 
 </div>

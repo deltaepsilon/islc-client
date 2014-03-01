@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('islcClientApp')
-  .controller('DrawerCtrl', function ($scope) {
+  .controller('BodyCtrl', function ($scope) {
     $scope.showDrawer = false;
     $scope.hideDrawer = true;
 

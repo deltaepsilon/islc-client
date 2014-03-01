@@ -12,22 +12,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <!-- build:css(.tmp) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="styles/baby-blue.css">
-        <link rel="stylesheet" href="styles/fonts.css">
-        <link rel="stylesheet" href="bower_components/pure/src/buttons/css/buttons.css">
-        <link rel="stylesheet" href="bower_components/pure/src/buttons/css/buttons-core.css">
-        <link rel="stylesheet" href="bower_components/pure/src/forms/css/forms.css">
-        <link rel="stylesheet" href="bower_components/pure/src/forms/css/forms-r.css">
-        <link rel="stylesheet" href="bower_components/pure/src/grids/css/grids-core.css">
-        <link rel="stylesheet" href="bower_components/pure/src/grids/css/grids-r.css">
-        <link rel="stylesheet" href="bower_components/pure/src/grids/css/grids-units.css">
-        <link rel="stylesheet" href="bower_components/pure/src/menus/css/menus.css">
-        <link rel="stylesheet" href="bower_components/pure/src/menus/css/menus-core.css">
-        <link rel="stylesheet" href="bower_components/pure/src/menus/css/menus-paginator.css">
-        <link rel="stylesheet" href="bower_components/pure/src/menus/css/menus-r.css">
-        <link rel="stylesheet" href="bower_components/pure/src/tables/css/tables.css">
-        <link rel="stylesheet" href="bower_components/angular-grid/ng-grid.css"/>
+        <link rel="stylesheet" href="styles/screen.css">
         <!-- endbuild -->
         <link rel="stylesheet" href="styles/print.css" media="print"/>
 
@@ -41,64 +26,61 @@
     <![endif]-->
 
     <!--[if lt IE 9]>
-      <script src="bower_components/es5-shim/es5-shim.js"></script>
-      <script src="bower_components/json3/lib/json3.min.js"></script>
+    <script src="lib/es5-shim/es5-shim.js"></script>
+    <script src="lib/json3/lib/json3.min.js"></script>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div id="layout" class="pure-g-r active" ng-controller="NavCtrl">
-        <a href="#menu" id="menuLink" class="pure-menu-link active print-display-none">
-            <span></span>
-        </a>
-        <nav class="pure-u-1 active print-display-none" id="menu" qv-active="qv-active-route|pure-menu-selected">
-            <div class="pure-menu pure-menu-open">
-                <a class="pure-menu-heading" href="/">ISLC Client</a>
+    <div id="layout" class="active" ng-controller="NavCtrl">
+        <nav class="active print-display-none top-bar" id="menu" qv-active="qv-active-route|active">
+            <ul>
+                <li class="small-12 medium-4 large-2" qv-active-route="/galleries">
+                    <a ui-sref="galleries">Galleries</a>
+                </li>
 
-                <ul>
+                <li class="small-12 medium-4 large-2" qv-active-route="/comments">
+                    <a ui-sref="comments">Comments</a>
+                </li>
 
-                    <li qv-active-route="/galleries">
-                        <a ui-sref="galleries">Galleries</a>
-                    </li>
+                <li class="small-12 medium-4 large-2" qv-active-route="/discounts">
+                    <a ui-sref="discounts">Discounts</a>
+                </li>
 
-                    <li qv-active-route="/comments">
-                        <a ui-sref="comments">Comments</a>
-                    </li>
+                <li class="small-12 medium-4 large-2" qv-active-route="/transactions">
+                    <a ui-sref="transactions">Transactions</a>
+                </li>
 
-                    <li qv-active-route="/discounts">
-                        <a ui-sref="discounts">Discounts</a>
-                    </li>
+                <li class="small-12 medium-4 large-2" qv-active-route="/files">
+                    <a ui-sref="files">Files</a>
+                </li>
 
-                    <li qv-active-route="/transactions">
-                        <a ui-sref="transactions">Transactions</a>
-                    </li>
+                <li class="small-12 medium-4 large-2 end" qv-active-route="/announcements">
+                    <a ui-sref="announcements">Announcements</a>
+                </li>
 
-                    <li qv-active-route="/files">
-                        <a ui-sref="files">Files</a>
-                    </li>
-
-                </ul>
-            </div>
+            </ul>
         </nav>
 
-        <div  ng-controller="DrawerCtrl">
-            <div class="pure-u-1" ui-view="body"></div>
-        </div>
+        <div id="body-view" ui-view="body" ng-controller="BodyCtrl"></div>
     </div>
 
         <!-- build:js scripts/modules.js -->
-        <script src="bower_components/jquery/jquery.js"></script>
-        <script src="bower_components/angular/angular.js"></script>
-        <script src="bower_components/underscore/underscore-min.js"></script>
-        <script src="bower_components/angular-resource/angular-resource.js"></script>
-        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-        <script src="bower_components/angular-grid/ng-grid-2.0.7.min.js"></script>
-        <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-        <script src="bower_components/showdown/compressed/showdown.js"></script>
-        <script src="bower_components/angular-markdown/angular.markdown.js"></script>
-        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-        <script src="bower_components/restangular/dist/restangular.js"></script>
+        <script src="lib/jquery/jquery.js"></script>
+        <script src="lib/angular/angular.js"></script>
+        <script src="lib/underscore/underscore-min.js"></script>
+        <script src="lib/angular-resource/angular-resource.js"></script>
+        <script src="lib/angular-cookies/angular-cookies.js"></script>
+        <script src="lib/angular-sanitize/angular-sanitize.js"></script>
+        <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="lib/angular-grid/ng-grid-2.0.7.min.js"></script>
+        <script src="lib/angular-animate/angular-animate.min.js"></script>
+        <script src="lib/showdown/compressed/showdown.js"></script>
+        <script src="lib/angular-markdown/angular.markdown.js"></script>
+        <script src="lib/angular-sanitize/angular-sanitize.js"></script>
+        <script src="lib/restangular/dist/restangular.js"></script>
+        <script src="lib/firebase/firebase.js"></script>
+        <script src="lib/angularfire/angularfire.js"></script>
+        <script src="lib/firebase-simple-login/firebase-simple-login.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -113,7 +95,6 @@
         <script src="scripts/services/commentService.js"></script>
         <script src="scripts/controllers/comments.js"></script>
         <script src="scripts/directives/qvGalleryViewer.js"></script>
-        <script src="scripts/controllers/drawer.js"></script>
         <script src="scripts/controllers/Discounts.js"></script>
         <script src="scripts/services/discountService.js"></script>
         <script src="scripts/directives/contenteditable.js"></script>
@@ -123,6 +104,9 @@
         <script src="scripts/directives/qvClickTarget.js"></script>
         <script src="scripts/controllers/Files.js"></script>
         <script src="scripts/services/filesService.js"></script>
+        <script src="scripts/services/announcementsService.js"></script>
+        <script src="scripts/controllers/Announcements.js"></script>
+        <script src="scripts/controllers/Body.js"></script>
         <!-- endbuild -->
 </body>
 </html>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('islcClientApp', ['ui.router', 'ngGrid', 'angular-markdown', 'ngSanitize', 'restangular'])
+angular.module('islcClientApp', ['ui.router', 'ngGrid', 'angular-markdown', 'ngSanitize', 'restangular', 'firebase'])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider) {
     var env = window.envVars;
 
@@ -129,6 +129,20 @@ angular.module('islcClientApp', ['ui.router', 'ngGrid', 'angular-markdown', 'ngS
           }
         }
 
+      })
+      .state('announcements', {
+        url: '/announcements',
+        views: {
+          body: {
+            templateUrl: 'views/announcements.html',
+            controller: 'AnnouncementsCtrl',
+            resolve: {
+              announcements: function (announcementsService) {
+                return announcementsService.get();
+              }
+            }
+          }
+        }
       });
 
     $locationProvider.html5Mode(true);
