@@ -12,11 +12,15 @@ angular.module('islcClientApp')
       get: getAnnouncementsRef,
 
       create: function (text) {
-        return getAnnouncementsRef().$add({ text: text, date: moment().format('YYYY-MM-DD') });
+        return getAnnouncementsRef().$add({ text: text, date: moment().format('YYYY-MM-DD'), active: true });
       },
 
       remove: function (id) {
         return getAnnouncementsRef().$remove(id);
+      },
+
+      update: function (id, announcement) {
+        return getAnnouncementsRef().$child(id).$update(announcement);
       }
     }
   });

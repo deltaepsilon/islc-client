@@ -31,6 +31,7 @@
                 <th>row</th>
                 <th>date</th>
                 <th>text</th>
+                <th>Active</th>
                 <th>action</th>
             </tr>
         </thead>
@@ -42,13 +43,16 @@
                     <markdown ng-model="announcement.text" line-breaks="true" strip="true"></markdown>
                 </td>
                 <td>
+                    <input type="checkbox" ng-model="announcement.active" ng-change="updateAnnouncement(id, announcement)"/>
+                </td>
+                <td>
                     <button ng-click="deleteAnnouncement(id)" class="tiny">Delete</button>
                 </td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="4">
+                <td colspan="5">
                     <!--<button class="pure-button full-width" ng-click="getMoreComments()" ng-disabled="searchDisabled">Load More</button>-->
                 </td>
             </tr>
