@@ -2,34 +2,57 @@
     <h1>Announcements</h1>
 </div>
 
-        {{ announcements }}
+<div class="content">
+    <form name="annoucementsForm">
+        <fieldset>
+            <div class="row">
+                <div class="small-12">
+                    <label for="new-announcement">New Announcement</label>
+                    <textarea class="small-12" name="newAnnouncment" id="new-announcement" ng-model="newAnnouncement"></textarea>
+                </div>
 
-<div class="content full-width pure-g-r">
-    <div class="pure-u-1" style="margin-right: auto;">
-        <table id="announcements-table" class="pure-table pure-table-striped full-width">
-            <thead class="uppercase">
-                <tr>
-                    <th>row</th>
-                    <th>date</th>
-                    <th>text</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="animate-repeat row-{{ $index }}" ng-repeat="announcement in announcements">
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ announcement.date | date }}</td>
-                    <td>{{ announcement.text }}</td>
+                <div class="small-12">
+                    <markdown ng-model="newAnnouncement" line-breaks="true" strip="true"></markdown>
+                </div>
 
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="100%">
-                        <!--<button class="pure-button full-width" ng-click="getMoreComments()" ng-disabled="searchDisabled">Load More</button>-->
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
+                <div class="small-12">
+                    <br>
+
+                    <button ng-click="addAnnouncement(newAnnouncement)">Add Announcement</button>
+                </div>
+
+            </div>
+        </fieldset>
+    </form>
+
+    <table id="announcements-table" class="small-12">
+        <thead class="uppercase">
+            <tr>
+                <th>row</th>
+                <th>date</th>
+                <th>text</th>
+                <th>action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="animate-repeat row-{{ $index }}" ng-repeat="(id, announcement) in announcements">
+                <td>{{ $index + 1 }}</td>
+                <td>{{ announcement.date | date }}</td>
+                <td>
+                    <markdown ng-model="announcement.text" line-breaks="true" strip="true"></markdown>
+                </td>
+                <td>
+                    <button ng-click="deleteAnnouncement(id)" class="tiny">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    <!--<button class="pure-button full-width" ng-click="getMoreComments()" ng-disabled="searchDisabled">Load More</button>-->
+                </td>
+            </tr>
+        </tfoot>
+    </table>
 
 </div>
