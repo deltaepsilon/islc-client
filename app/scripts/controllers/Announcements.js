@@ -5,7 +5,10 @@ angular.module('islcClientApp')
 
     $scope.announcements = announcements;
 
-    $scope.addAnnouncement = announcementsService.create;
+    $scope.addAnnouncement = function (text) {
+      $scope.newAnnouncement = "";
+      announcementsService.create(text);
+    };
 
     $scope.deleteAnnouncement = announcementsService.remove;
 
