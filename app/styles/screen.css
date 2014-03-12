@@ -3107,6 +3107,77 @@ label.error {
   display: block;
 }
 
+/* Panels */
+/* line 70, ../lib/foundation/scss/foundation/components/_panels.scss */
+.panel {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #d8d8d8;
+  margin-bottom: 1.25rem;
+  padding: 1.25rem;
+  background: #f2f2f2;
+}
+/* line 48, ../lib/foundation/scss/foundation/components/_panels.scss */
+.panel > :first-child {
+  margin-top: 0;
+}
+/* line 49, ../lib/foundation/scss/foundation/components/_panels.scss */
+.panel > :last-child {
+  margin-bottom: 0;
+}
+/* line 54, ../lib/foundation/scss/foundation/components/_panels.scss */
+.panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6, .panel p {
+  color: #333333;
+}
+/* line 58, ../lib/foundation/scss/foundation/components/_panels.scss */
+.panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6 {
+  line-height: 1;
+  margin-bottom: 0.625rem;
+}
+/* line 60, ../lib/foundation/scss/foundation/components/_panels.scss */
+.panel h1.subheader, .panel h2.subheader, .panel h3.subheader, .panel h4.subheader, .panel h5.subheader, .panel h6.subheader {
+  line-height: 1.4;
+}
+/* line 72, ../lib/foundation/scss/foundation/components/_panels.scss */
+.panel.callout {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #b6edff;
+  margin-bottom: 1.25rem;
+  padding: 1.25rem;
+  background: #ecfaff;
+}
+/* line 48, ../lib/foundation/scss/foundation/components/_panels.scss */
+.panel.callout > :first-child {
+  margin-top: 0;
+}
+/* line 49, ../lib/foundation/scss/foundation/components/_panels.scss */
+.panel.callout > :last-child {
+  margin-bottom: 0;
+}
+/* line 54, ../lib/foundation/scss/foundation/components/_panels.scss */
+.panel.callout h1, .panel.callout h2, .panel.callout h3, .panel.callout h4, .panel.callout h5, .panel.callout h6, .panel.callout p {
+  color: #333333;
+}
+/* line 58, ../lib/foundation/scss/foundation/components/_panels.scss */
+.panel.callout h1, .panel.callout h2, .panel.callout h3, .panel.callout h4, .panel.callout h5, .panel.callout h6 {
+  line-height: 1;
+  margin-bottom: 0.625rem;
+}
+/* line 60, ../lib/foundation/scss/foundation/components/_panels.scss */
+.panel.callout h1.subheader, .panel.callout h2.subheader, .panel.callout h3.subheader, .panel.callout h4.subheader, .panel.callout h5.subheader, .panel.callout h6.subheader {
+  line-height: 1.4;
+}
+/* line 74, ../lib/foundation/scss/foundation/components/_panels.scss */
+.panel.callout a {
+  color: #008cba;
+}
+/* line 79, ../lib/foundation/scss/foundation/components/_panels.scss */
+.panel.radius {
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+
 /* line 89, ../lib/foundation/scss/foundation/components/_tables.scss */
 table {
   background: white;
@@ -6336,13 +6407,18 @@ a {
   display: inline;
 }
 
-/* line 146, modules/_global.scss */
+/* line 145, modules/_global.scss */
+.hidden {
+  display: none;
+}
+
+/* line 150, modules/_global.scss */
 .print-clicked {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
   opacity: 0.2;
 }
 
-/* line 151, modules/_global.scss */
+/* line 155, modules/_global.scss */
 .rotate-90 {
   transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
@@ -6354,7 +6430,7 @@ a {
   -ms-transform-origin: 50% 50%;
 }
 
-/* line 156, modules/_global.scss */
+/* line 160, modules/_global.scss */
 .rotate-180 {
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
@@ -6366,7 +6442,7 @@ a {
   -ms-transform-origin: 50% 50%;
 }
 
-/* line 161, modules/_global.scss */
+/* line 165, modules/_global.scss */
 .rotate-270 {
   transform: rotate(270deg);
   -webkit-transform: rotate(270deg);
@@ -6378,7 +6454,7 @@ a {
   -ms-transform-origin: 50% 50%;
 }
 
-/* line 166, modules/_global.scss */
+/* line 170, modules/_global.scss */
 .disabled {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
@@ -6425,4 +6501,10 @@ a {
 .gallery-view .zoomed #gallery-image {
   max-height: inherit;
   max-width: inherit;
+}
+
+/* line 1, modules/_images.scss */
+.thumbnail {
+  max-height: 100px;
+  max-width: 100px;
 }

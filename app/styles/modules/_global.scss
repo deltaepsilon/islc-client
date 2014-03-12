@@ -142,6 +142,10 @@ a {
   display: inline;
 }
 
+.hidden {
+  display: none;
+}
+
 //Print
 .print-clicked {
   @include opacity(0.2);

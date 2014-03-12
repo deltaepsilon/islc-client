@@ -1,0 +1,97 @@
+<div class="header">
+    <h1>Images</h1>
+</div>
+
+<div class="content">
+    <form name="imagesForm" flow-init>
+        <fieldset>
+            <div class="row">
+                <div class="small-3 column">
+                    <label class="button" for="upload-file">Upload Files</label>
+                    <input id="upload-file" class="hidden" type="file" flow-btn/>
+                </div>
+
+                <div class="small-3 column">
+                    <label class="button" for="upload-directory">Upload Directory</label>
+                    <input id="upload-directory" class="hidden" type="file" flow-btn flow-directory/>
+                </div>
+
+                <div class="small-6 column">
+                    <div class="panel callout" flow-drop>
+                        Drag and drop your files
+                    </div>
+                </div>
+
+                <div class="small-3 column">
+                    <button ng-click="upload($flow)">Upload</button>
+                </div>
+
+                <div class="small-9 column">
+                    <table ng-show="$flow.files.length">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Size</th>
+                                <th>Status</th>
+                                <th>Image</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="file in $flow.files">
+                                <td>{{ file.name }}</td>
+                                <td>{{ file.size }}</td>
+                                <td>{{ file.error || "Stable" }}</td>
+                                <td>
+                                    <img flow-img="file"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+            </div>
+        </fieldset>
+    </form>
+
+    <table id="announcements-table" class="small-12">
+        <thead class="uppercase">
+            <tr>
+                <th>row</th>
+                <th>date</th>
+                <th>image</th>
+                <th>link</th>
+                <th>markdown</th>
+                <th>action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="row-{{ $index }}" ng-repeat="(id, image) in images.Contents">
+                <td>{{ $index + 1 }}</td>
+                <td>{{ image.LastModified | date }}</td>
+                <td>
+                    <img class="thumbnail" ng-src="https://s3.amazonaws.com/{{ images.Name }}/{{ image.Key }}"/>
+                </td>
+                <td>
+                    <a href="https://s3.amazonaws.com/{{ images.Name }}/{{ image.Key }}" target="_blank">{{ image.Key }}</a>
+                </td>
+                <td>
+                    <textarea>![{{ image.Key | remove:images.Prefix}}](https://s3.amazonaws.com/{{ images.Name }}/{{ image.Key }})</textarea>
+
+                </td>
+                <td>
+                    <button ng-click="deleteImage(image.Key)" class="tiny">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6">
+                    <!--<button class="pure-button full-width" ng-click="getMoreComments()" ng-disabled="searchDisabled">Load More</button>-->
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+</div>

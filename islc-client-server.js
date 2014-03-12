@@ -3,10 +3,13 @@ var express = require('express'),
   fs = require('fs'),
   AWS = require('aws-sdk'),
   S3 = new AWS.S3(),
+  moment = require('moment'),
   app = express(),
   request = require('superagent'),
   environment = process.env.NODE_ENV || 'development',
   privateBucket = process.env.AMAZON_PRIVATE_BUCKET,
+  publicBucket = process.env.AMAZON_PUBLIC_BUCKET,
+  clientPrefix = 'calligraphy/client',
   angularEnvVars = {
     development: {
       env: 'dev',
@@ -97,6 +100,74 @@ app.get('/aws', function (req, res) {
 
 });
 
+// Read files from s3 bucket.
+app.get('/image', function (req, res) {
+  S3.listObjects({
+      Bucket: publicBucket,
+      Prefix: clientPrefix
+    },
+  function (err, data) {
+    if (err) {
+      res.send(500, err);
+    } else {
+      res.json(data);
+    }
+
+  });
+});
+
+// Add file to s3 bucket.
+app.post('/image/:fileName', function (req, res) {
+
+
+  var fileName = req.params.fileName,
+    dataUrl = req.body.file,
+    matches = dataUrl.match(/^data:.+\/(.+);base64,(.*)$/);
+
+  if (!matches) {
+    return res.send(500, {"error": "No file sent."});
+  }
+
+  var extension = matches[1],
+    file = new Buffer(matches[2], "base64"),
+    type = req.body.type,
+    payload = {
+      Bucket: publicBucket,
+      Key: clientPrefix + '/' + fileName,
+      ACL: 'public-read',
+      Body: file,
+      CacheControl: "max-age=34536000",
+      ContentType: type,
+      StorageClass: "REDUCED_REDUNDANCY"
+    };
+
+  S3.putObject(payload, function (err, data) {
+    if (err) {
+      res.send(500, err);
+    } else {
+      res.json(data);
+    }
+
+  });
+
+});
+
+app.del('/image/:fileName', function (req, res) {
+  var fileName = req.params.fileName;
+
+  S3.deleteObject({
+    Bucket: publicBucket,
+    Key: clientPrefix + '/' + fileName
+  }, function (err, data) {
+    console.log('s3 del result', err, data);
+    if (err) {
+      res.send(500, err);
+    } else {
+      res.json(data);
+    }
+  });
+});
+
 
 /**
  * Set up Angular routes to return index.html
@@ -124,6 +195,7 @@ app.get('/discounts', returnIndex);
 app.get('/transactions', returnIndex);
 app.get('/files', returnIndex);
 app.get('/announcements', returnIndex);
+app.get('/images', returnIndex);
 
 /**
  * Serve static files

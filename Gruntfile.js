@@ -16,8 +16,6 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
 
-  grunt.loadNpmTasks('grunt-contrib-sass');
-
   // configurable paths
   var yeomanConfig = {
     app: 'app',
@@ -330,6 +328,11 @@ module.exports = function (grunt) {
           sassDir        : '<%= appConfig.app.src %>/<%= appConfig.app.assets.styles %>',
           httpGeneratedImagesPath : '../<%= appConfig.app.assets.images %>'
         }
+      }
+    },
+    bowerInstall: {
+      target: {
+        src: ['app/views/index.html']
       }
     }
   });

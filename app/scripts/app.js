@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('islcClientApp', ['ui.router', 'ngGrid', 'angular-markdown', 'ngSanitize', 'restangular', 'firebase'])
+angular.module('islcClientApp', ['ui.router', 'ngGrid', 'angular-markdown', 'ngSanitize', 'restangular', 'firebase', 'flow'])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider) {
     var env = window.envVars;
 
@@ -139,6 +139,20 @@ angular.module('islcClientApp', ['ui.router', 'ngGrid', 'angular-markdown', 'ngS
             resolve: {
               announcements: function (announcementsService) {
                 return announcementsService.get();
+              }
+            }
+          }
+        }
+      })
+      .state('images', {
+        url: '/images',
+        views: {
+          body: {
+            templateUrl: 'views/images.html',
+            controller: 'ImagesCtrl',
+            resolve: {
+              images: function (imagesService) {
+                return imagesService.get();
               }
             }
           }
