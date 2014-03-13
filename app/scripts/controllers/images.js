@@ -3,8 +3,13 @@
 angular.module('islcClientApp')
   .controller('ImagesCtrl', function ($scope, $q, imagesService, images) {
     var refresh = function () {
-      imagesService.get().then(function (images) {
-        $scope.image = images;
+      return imagesService.get().then(function (images) {
+        var deferred = $q.defer();
+
+        $scope.images = images;
+        deferred.resolve(images);
+
+        return deferred.promise;
 
       });
     };
@@ -12,7 +17,9 @@ angular.module('islcClientApp')
     $scope.images = images;
 
     $scope.upload = function (Flow) {
-      imagesService.uploadFlow(Flow).then(refresh);
+      imagesService.uploadFlow(Flow).then(refresh).then(function () {
+        Flow.files = []; // Clear out upload queue
+      });
     };
 
     $scope.deleteImage = function (key) {

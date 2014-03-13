@@ -155,11 +155,16 @@ app.post('/image/:fileName', function (req, res) {
 app.del('/image/:fileName', function (req, res) {
   var fileName = req.params.fileName;
 
-  S3.deleteObject({
+  S3.deleteObjects({
     Bucket: publicBucket,
-    Key: clientPrefix + '/' + fileName
+    Delete: {
+      Objects: [{
+        Key: fileName
+      }]
+
+    }
+
   }, function (err, data) {
-    console.log('s3 del result', err, data);
     if (err) {
       res.send(500, err);
     } else {

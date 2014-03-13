@@ -31,7 +31,7 @@ angular.module('islcClientApp')
           deferred,
           handler = function (file, deferred) {
             fileReader.onloadend = function (e) {
-              service.create(file, fileReader, e.total).then(deferred.resolve, deferred.reject);
+              service.create(file, e.target, e.total).then(deferred.resolve, deferred.reject);
             };
           };
 

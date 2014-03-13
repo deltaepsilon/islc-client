@@ -74,7 +74,7 @@
                     <img class="thumbnail" ng-src="https://s3.amazonaws.com/{{ images.Name }}/{{ image.Key }}"/>
                 </td>
                 <td>
-                    <a href="https://s3.amazonaws.com/{{ images.Name }}/{{ image.Key }}" target="_blank">{{ image.Key }}</a>
+                    <a href="https://s3.amazonaws.com/{{ images.Name }}/{{ image.Key }}" target="_blank">{{ image.Key | remove:images.Prefix }}</a>
                 </td>
                 <td>
                     <textarea>![{{ image.Key | remove:images.Prefix}}](https://s3.amazonaws.com/{{ images.Name }}/{{ image.Key }})</textarea>
