@@ -61,6 +61,7 @@
                 <th>row</th>
                 <th>date</th>
                 <th>image</th>
+                <th>name</th>
                 <th>link</th>
                 <th>markdown</th>
                 <th>action</th>
@@ -77,8 +78,10 @@
                     <a href="https://s3.amazonaws.com/{{ images.Name }}/{{ image.Key }}" target="_blank">{{ image.Key | remove:images.Prefix }}</a>
                 </td>
                 <td>
-                    <textarea>![{{ image.Key | remove:images.Prefix}}](https://s3.amazonaws.com/{{ images.Name }}/{{ image.Key }})</textarea>
-
+                    <input type="text" value="https://s3.amazonaws.com/{{ images.Name }}/{{ image.Key }}" qv-select-text/>
+                </td>
+                <td>
+                    <input type="text" value="![{{ image.Key | remove:images.Prefix}}](https://s3.amazonaws.com/{{ images.Name }}/{{ image.Key }})" qv-select-text/>
                 </td>
                 <td>
                     <button ng-click="deleteImage(image.Key)" class="tiny">Delete</button>

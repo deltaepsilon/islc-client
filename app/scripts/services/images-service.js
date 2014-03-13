@@ -41,7 +41,7 @@ angular.module('islcClientApp')
           fileReader = new FileReader();
           handler(files[i].file, deferred);
           fileReader.readAsDataURL(files[i].file);
-          console.log('file:', files[i].file);
+
         }
 
         return $q.all(deferreds);
