@@ -6,28 +6,28 @@
     <form name="imagesForm" flow-init>
         <fieldset>
             <div class="row">
-                <div class="small-3 column">
-                    <label class="button" for="upload-file">Upload Files</label>
+                <div class="large-3 medium-12 column">
+                    <label class="button" for="upload-file">Select Files</label>
                     <input id="upload-file" class="hidden" type="file" flow-btn/>
                 </div>
 
-                <div class="small-3 column">
-                    <label class="button" for="upload-directory">Upload Directory</label>
+                <div class="large-3 medium-12 column">
+                    <label class="button" for="upload-directory">Select Directory</label>
                     <input id="upload-directory" class="hidden" type="file" flow-btn flow-directory/>
                 </div>
 
-                <div class="small-6 column">
+                <div class="large-6 medium-12 column">
                     <div class="panel callout" flow-drop>
                         Drag and drop your files
                     </div>
                 </div>
 
-                <div class="small-3 column">
-                    <button ng-click="upload($flow)">Upload</button>
-                </div>
+                <!--<div class="large-3 medium-12 column">-->
+                    <!--<button ng-click="upload($flow)" ng-show="$flow.files.length">Upload</button>-->
+                <!--</div>-->
 
-                <div class="small-9 column">
-                    <table ng-show="$flow.files.length">
+                <div class="small-12 column">
+                    <table class="small-12" ng-show="$flow.files.length">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -40,12 +40,19 @@
                             <tr ng-repeat="file in $flow.files">
                                 <td>{{ file.name }}</td>
                                 <td>{{ file.size }}</td>
-                                <td>{{ file.error || "Stable" }}</td>
+                                <td>{{ file.error || "Ready" }}</td>
                                 <td>
                                     <img flow-img="file"/>
                                 </td>
                             </tr>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">
+                                    <button class="right" ng-click="upload($flow)" ng-show="$flow.files.length">Upload</button>
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
 
