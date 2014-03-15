@@ -33,7 +33,9 @@ angular.module('islcClientApp')
       });
     }
 
+    var TAG_REGEX = /<.*?>/g;
     $scope.updateDiscount = function (discount) {
+      discount.code = discount.code.replace(TAG_REGEX, "");
       discountService.update(discount).then(updateDiscount);
     };
 
