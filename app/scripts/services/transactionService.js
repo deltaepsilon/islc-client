@@ -23,7 +23,10 @@ angular.module('islcClientApp')
       },
 
       updateTransaction: function (transaction) {
-        return Restangular.one('transaction', transaction.id).put(transaction);
+        var payload = {
+          processed: transaction.processed
+        };
+        return Restangular.one('transaction', transaction.id).put(payload);
       }
     };
   });
