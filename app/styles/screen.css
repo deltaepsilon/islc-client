@@ -1303,7 +1303,7 @@ form .row .row {
   margin: 0 -0.5rem;
 }
 /* line 80, ../lib/foundation/scss/foundation/components/_forms.scss */
-form .row .row .column,
+form .row .row .column, form .row .row .stuck.stuck-column,
 form .row .row .columns {
   padding: 0 0.5rem;
 }
@@ -1312,7 +1312,7 @@ form .row .row.collapse {
   margin: 0;
 }
 /* line 86, ../lib/foundation/scss/foundation/components/_forms.scss */
-form .row .row.collapse .column,
+form .row .row.collapse .column, form .row .row.collapse .stuck.stuck-column,
 form .row .row.collapse .columns {
   padding: 0;
 }
@@ -1324,9 +1324,10 @@ form .row .row.collapse input {
   -webkit-border-top-right-radius: 0;
 }
 /* line 99, ../lib/foundation/scss/foundation/components/_forms.scss */
-form .row input.column,
+form .row input.column, form .row input.stuck.stuck-column,
 form .row input.columns,
 form .row textarea.column,
+form .row textarea.stuck.stuck-column,
 form .row textarea.columns {
   padding-left: 0.5rem;
 }
@@ -1794,7 +1795,7 @@ label.error {
   clear: both;
 }
 /* line 208, ../lib/foundation/scss/foundation/components/_grid.scss */
-.row.collapse > .column,
+.row.collapse > .column, .row.collapse > .stuck.stuck-column,
 .row.collapse > .columns {
   padding-left: 0;
   padding-right: 0;
@@ -1842,7 +1843,7 @@ label.error {
 }
 
 /* line 219, ../lib/foundation/scss/foundation/components/_grid.scss */
-.column,
+.column, .stuck.stuck-column,
 .columns {
   padding-left: 0.9375rem;
   padding-right: 0.9375rem;
@@ -1852,7 +1853,7 @@ label.error {
 
 @media only screen {
   /* line 153, ../lib/foundation/scss/foundation/components/_grid.scss */
-  .column.small-centered,
+  .column.small-centered, .small-centered.stuck.stuck-column,
   .columns.small-centered {
     margin-left: auto;
     margin-right: auto;
@@ -1860,7 +1861,7 @@ label.error {
   }
 
   /* line 156, ../lib/foundation/scss/foundation/components/_grid.scss */
-  .column.small-uncentered,
+  .column.small-uncentered, .small-uncentered.stuck.stuck-column,
   .columns.small-uncentered {
     margin-left: 0;
     margin-right: 0;
@@ -1868,7 +1869,7 @@ label.error {
   }
 
   /* line 163, ../lib/foundation/scss/foundation/components/_grid.scss */
-  .column.small-uncentered.opposite,
+  .column.small-uncentered.opposite, .small-uncentered.opposite.stuck.stuck-column,
   .columns.small-uncentered.opposite {
     float: right;
   }
@@ -2018,7 +2019,7 @@ label.error {
   }
 
   /* line 177, ../lib/foundation/scss/foundation/components/_grid.scss */
-  .column,
+  .column, .stuck.stuck-column,
   .columns {
     position: relative;
     padding-left: 0.9375rem;
@@ -2168,7 +2169,7 @@ label.error {
 }
 @media only screen and (min-width: 40.063em) {
   /* line 153, ../lib/foundation/scss/foundation/components/_grid.scss */
-  .column.medium-centered,
+  .column.medium-centered, .medium-centered.stuck.stuck-column,
   .columns.medium-centered {
     margin-left: auto;
     margin-right: auto;
@@ -2176,7 +2177,7 @@ label.error {
   }
 
   /* line 156, ../lib/foundation/scss/foundation/components/_grid.scss */
-  .column.medium-uncentered,
+  .column.medium-uncentered, .medium-uncentered.stuck.stuck-column,
   .columns.medium-uncentered {
     margin-left: 0;
     margin-right: 0;
@@ -2184,7 +2185,7 @@ label.error {
   }
 
   /* line 163, ../lib/foundation/scss/foundation/components/_grid.scss */
-  .column.medium-uncentered.opposite,
+  .column.medium-uncentered.opposite, .medium-uncentered.opposite.stuck.stuck-column,
   .columns.medium-uncentered.opposite {
     float: right;
   }
@@ -2334,7 +2335,7 @@ label.error {
   }
 
   /* line 177, ../lib/foundation/scss/foundation/components/_grid.scss */
-  .column,
+  .column, .stuck.stuck-column,
   .columns {
     position: relative;
     padding-left: 0.9375rem;
@@ -2628,7 +2629,7 @@ label.error {
 }
 @media only screen and (min-width: 64.063em) {
   /* line 153, ../lib/foundation/scss/foundation/components/_grid.scss */
-  .column.large-centered,
+  .column.large-centered, .large-centered.stuck.stuck-column,
   .columns.large-centered {
     margin-left: auto;
     margin-right: auto;
@@ -2636,7 +2637,7 @@ label.error {
   }
 
   /* line 156, ../lib/foundation/scss/foundation/components/_grid.scss */
-  .column.large-uncentered,
+  .column.large-uncentered, .large-uncentered.stuck.stuck-column,
   .columns.large-uncentered {
     margin-left: 0;
     margin-right: 0;
@@ -2644,7 +2645,7 @@ label.error {
   }
 
   /* line 163, ../lib/foundation/scss/foundation/components/_grid.scss */
-  .column.large-uncentered.opposite,
+  .column.large-uncentered.opposite, .large-uncentered.opposite.stuck.stuck-column,
   .columns.large-uncentered.opposite {
     float: right;
   }
@@ -2794,7 +2795,7 @@ label.error {
   }
 
   /* line 177, ../lib/foundation/scss/foundation/components/_grid.scss */
-  .column,
+  .column, .stuck.stuck-column,
   .columns {
     position: relative;
     padding-left: 0.9375rem;
@@ -6096,112 +6097,122 @@ th.hide-for-touch {
   text-align: center;
 }
 
-/* line 17, theme/_color.scss */
+/* line 18, theme/_color.scss */
 .background-green1, .top-bar a:hover {
   background-color: #98ccb6;
 }
 
-/* line 17, theme/_color.scss */
+/* line 18, theme/_color.scss */
 .background-green2, .top-bar .active > a, .top-bar .active > a:hover {
   background-color: #177f62;
 }
 
-/* line 17, theme/_color.scss */
+/* line 18, theme/_color.scss */
 .background-gray0 {
   background-color: #e7e8e9;
 }
 
-/* line 17, theme/_color.scss */
+/* line 18, theme/_color.scss */
 .background-gray1 {
   background-color: #f2f2f2;
 }
 
-/* line 17, theme/_color.scss */
+/* line 18, theme/_color.scss */
 .background-gray2 {
   background-color: #dddddd;
 }
 
-/* line 17, theme/_color.scss */
+/* line 18, theme/_color.scss */
 .background-gray3 {
   background-color: #414141;
 }
 
-/* line 17, theme/_color.scss */
+/* line 18, theme/_color.scss */
 .background-gray4 {
   background-color: #999999;
 }
 
-/* line 17, theme/_color.scss */
+/* line 18, theme/_color.scss */
 .background-red1 {
   background-color: #bd3f42;
 }
 
-/* line 17, theme/_color.scss */
+/* line 18, theme/_color.scss */
 .background-gray {
   background-color: #333333;
 }
 
-/* line 17, theme/_color.scss */
+/* line 18, theme/_color.scss */
 .background-white, .gallery-view, .gallery-view #gallery-comments-table {
   background-color: white;
 }
 
-/* line 17, theme/_color.scss */
+/* line 18, theme/_color.scss */
+.background-white-transparent {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* line 18, theme/_color.scss */
 .background-black {
   background-color: black;
 }
 
-/* line 24, theme/_color.scss */
+/* line 25, theme/_color.scss */
 .text-green1 {
   color: #98ccb6;
 }
 
-/* line 24, theme/_color.scss */
+/* line 25, theme/_color.scss */
 .text-green2, a:hover, a:visited {
   color: #177f62;
 }
 
-/* line 24, theme/_color.scss */
+/* line 25, theme/_color.scss */
 .text-gray0 {
   color: #e7e8e9;
 }
 
-/* line 24, theme/_color.scss */
+/* line 25, theme/_color.scss */
 .text-gray1 {
   color: #f2f2f2;
 }
 
-/* line 24, theme/_color.scss */
+/* line 25, theme/_color.scss */
 .text-gray2 {
   color: #dddddd;
 }
 
-/* line 24, theme/_color.scss */
+/* line 25, theme/_color.scss */
 .text-gray3, body, a {
   color: #414141;
 }
 
-/* line 24, theme/_color.scss */
+/* line 25, theme/_color.scss */
 .text-gray4 {
   color: #999999;
 }
 
-/* line 24, theme/_color.scss */
+/* line 25, theme/_color.scss */
 .text-red1 {
   color: #bd3f42;
 }
 
-/* line 24, theme/_color.scss */
+/* line 25, theme/_color.scss */
 .text-gray {
   color: #333333;
 }
 
-/* line 24, theme/_color.scss */
+/* line 25, theme/_color.scss */
 .text-white, .top-bar a, .top-bar a:visited {
   color: white;
 }
 
-/* line 24, theme/_color.scss */
+/* line 25, theme/_color.scss */
+.text-white-transparent {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* line 25, theme/_color.scss */
 .text-black {
   color: black;
 }
@@ -6458,6 +6469,19 @@ a {
 .disabled {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
+}
+
+/* line 174, modules/_global.scss */
+.stuck {
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+/* line 175, modules/_global.scss */
+.stuck.stuck-column {
+  position: fixed;
+  left: 0;
+  right: 0;
 }
 
 /* line 1, modules/_gallery-view.scss */

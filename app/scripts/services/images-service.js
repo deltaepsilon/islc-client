@@ -23,6 +23,10 @@ angular.module('islcClientApp')
         return ExpressRestangular.one('image', key).remove();
       },
 
+      setMetadata: function (key, metadata) {
+        return ExpressRestangular.one('image', key).post('metadata', metadata);
+      },
+
       uploadFlow: function (Flow) {
         var files = Flow.files,
           i = files.length,

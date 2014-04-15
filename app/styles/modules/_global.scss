@@ -170,3 +170,18 @@ a {
 .disabled {
   @include opacity(0.5);
 }
+
+.stuck {
+  &.stuck-column {
+    @extend .column;
+
+    position: fixed;
+    left: 0;
+    right: 0;
+  }
+  
+  position: fixed;
+  top: 0;
+  z-index: 100;
+
+}

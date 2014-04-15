@@ -1,5 +1,6 @@
 require('newrelic');
-var express = require('express'),
+var Q = require('q'),
+  express = require('express'),
   fs = require('fs'),
   AWS = require('aws-sdk'),
   S3 = new AWS.S3(),
@@ -107,6 +108,68 @@ app.get('/image', function (req, res) {
       Prefix: clientPrefix
     },
   function (err, data) {
+    if (err) {
+      res.send(500, err);
+    } else {
+      var i = data.Contents.length,
+        promises = [],
+        deferred,
+        getMetadata = function (i, deferred) {
+          S3.headObject({
+            Bucket: publicBucket,
+            Key: data.Contents[i].Key
+          }, function (err, metadata) {
+            if (err) {
+              deferred.reject(err);
+            } else {
+              data.Contents[i].Metadata = metadata.Metadata;
+              deferred.resolve(data.Contents[i]);
+            }
+          });
+          return deferred.promise;
+
+        };
+
+      while (i--) {
+        deferred = Q.defer();
+        promises.push(getMetadata(i, deferred));
+      }
+
+      Q.all(promises).then(function () {
+        res.json(data);
+      });
+
+    }
+
+  });
+});
+
+// Update header
+app.post('/image/:fileName/metadata', function (req, res) {
+  var fileName = req.params.fileName,
+    metadata = {},
+    keys = Object.keys(req.body),
+    i = keys.length;
+
+  while (i--) { // I'm not sure why I'm looping through this... seems like the right thing to do???
+    metadata[keys[i]] = req.body[keys[i]];
+  }
+
+
+  // Copy object with whatever headers have been specified.
+
+  var payload = {
+      Bucket: publicBucket,
+      CopySource: publicBucket + '/' + fileName,
+      Key: fileName,
+      ACL: 'public-read',
+      CacheControl: "max-age=34536000",
+      StorageClass: "REDUCED_REDUNDANCY",
+      Metadata: metadata,
+      MetadataDirective: "REPLACE"
+    };
+
+  S3.copyObject(payload, function (err, data) {
     if (err) {
       res.send(500, err);
     } else {

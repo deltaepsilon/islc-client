@@ -6,7 +6,8 @@
     "aws-sdk": "~1.6.0",
     "superagent": "~0.15.4",
     "newrelic": "~1.2.0",
-    "moment": "~2.5.1"
+    "moment": "~2.5.1",
+    "q": "~1.0.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
