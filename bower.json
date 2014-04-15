@@ -22,7 +22,7 @@
     "angular-notifications": "https://github.com/deltaepsilon/angular-notifications.git#master",
     "moment": "~2.5.1",
     "ng-flow": "~2.1.4",
-    "angular-sticky": "git@github.com:deltaepsilon/angular-sticky.git"
+    "angular-sticky": "https://github.com/deltaepsilon/angular-sticky.git"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.7",
