@@ -45,7 +45,7 @@
         <table id="galleries-table" class="small-12">
             <thead class="uppercase">
                 <tr>
-                    <th>row</th> <th>id</th> <th>user</th> <th>title</th> <th>updated</th> <th>done</th>
+                    <th>row</th> <th>id</th> <th>user</th> <th>title</th> <th>updated</th> <th>done</th> <th>reviewed</th>
                 </tr>
             </thead>
             <tbody>
@@ -59,13 +59,19 @@
                             type="checkbox"
                             ng-model="gallery.marked"
                             ng-change="updateGallery(gallery)"
-                            />
+                        />
+                    </td>
+                    <td><input
+                            type="checkbox"
+                            ng-model="gallery.reviewed"
+                            ng-change="updateGallery(gallery)"
+                        />
                     </td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="6">
+                    <td colspan="7">
                         <button ng-click="getMoreGalleries()" ng-disabled="searchDisabled">Load More</button>
                     </td>
                 </tr>

@@ -30,7 +30,7 @@ angular.module('islcClientApp')
       },
 
       updateComment: function (comment) {
-        return Restangular.one('comment', comment.id).put(_.pick(comment, 'comment', 'created', 'marked'));
+        return Restangular.one('comment', comment.id).put(_.pick(comment, 'comment', 'created', 'reviewed', 'marked'));
       },
 
       deleteComment: function (galleryID, comment) {

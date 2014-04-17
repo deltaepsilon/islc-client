@@ -40,7 +40,7 @@
         <table id="comments-table" class="small-12">
             <thead class="uppercase">
             <tr>
-                <th>row</th> <th>id</th> <th>user</th> <th>text</th> <th>updated</th> <th>done</th>
+                <th>row</th> <th>id</th> <th>user</th> <th>text</th> <th>updated</th> <th>done</th> <th>reviewed</th>
             </tr>
             </thead>
             <tbody>
@@ -54,13 +54,19 @@
                         type="checkbox"
                         ng-model="comment.marked"
                         ng-change="updateComment(comment)"
-                        />
+                    />
+                </td>
+                <td><input
+                        type="checkbox"
+                        ng-model="comment.reviewed"
+                        ng-change="updateComment(comment)"
+                    />
                 </td>
             </tr>
             </tbody>
             <tfoot>
             <tr>
-                <td colspan="6">
+                <td colspan="7">
                     <button class="pure-button full-width" ng-click="getMoreComments()" ng-disabled="searchDisabled">Load More</button>
                 </td>
             </tr>
