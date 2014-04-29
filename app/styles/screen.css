@@ -6326,6 +6326,11 @@ fieldset {
   left: initial;
 }
 
+/* line 13, theme/_form.scss */
+input[type="checkbox"] {
+  margin-top: .25rem;
+}
+
 /* line 16, modules/_global.scss */
 * {
   -moz-box-sizing: border-box;
@@ -6482,6 +6487,16 @@ a {
   position: fixed;
   left: 0;
   right: 0;
+}
+
+/* line 190, modules/_global.scss */
+markdown p {
+  margin-bottom: 1rem;
+}
+/* line 194, modules/_global.scss */
+markdown ul {
+  list-style: initial;
+  padding-left: 1rem;
 }
 
 /* line 1, modules/_gallery-view.scss */

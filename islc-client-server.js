@@ -1,10 +1,15 @@
 require('newrelic');
 var Q = require('q'),
+  _ = require('underscore'),
   express = require('express'),
   fs = require('fs'),
   AWS = require('aws-sdk'),
   S3 = new AWS.S3(),
   moment = require('moment'),
+  Firebase = require('firebase'),
+  Mandrill = require('mandrill-api/mandrill').Mandrill,
+  mandrill = new Mandrill(process.env.MANDRILL_API_KEY),
+  CronJob = require('cron').CronJob,
   app = express(),
   request = require('superagent'),
   environment = process.env.NODE_ENV || 'development',
@@ -17,17 +22,29 @@ var Q = require('q'),
       root: '/app',
       islc: 'https://calligraphy.quiver.is',
       api: 'https://calligraphy.quiver.is/api',
-      firebase: 'dev-quiver.firebaseIO.com'
+      firebase: 'dev-quiver.firebaseIO.com',
+      email: {
+        from: 'chris@quiver.is',
+        name: 'Chris Esplin'
+      }
     },
     production: {
       env: 'prod',
       root: '/app',
       islc: 'https://istilllovecalligraphy.com',
       api: 'https://istilllovecalligraphy.com/api',
-      firebase: 'quiver.firebaseIO.com'
+      firebase: 'quiver.firebaseIO.com',
+      email: {
+        from: 'melissa@istilllovecalligraphy.com',
+        name: 'Melissa Esplin'
+      }
     }
   },
-  fileRoot = __dirname + angularEnvVars[environment].root;
+  fileRoot = __dirname + angularEnvVars[environment].root,
+  firebaseRoot = new Firebase(angularEnvVars[environment].firebase),
+  firebaseSecret = process.env.QUIVER_INVOICE_FIREBASE_SECRET;
+
+firebaseRoot.auth(firebaseSecret);
 
 AWS.config.update({accessKeyId: process.env.AMAZON_ACCESS_KEY_ID, secretAccessKey: process.env.AMAZON_SECRET_ACCESS_KEY});
 
@@ -236,6 +253,127 @@ app.del('/image/:fileName', function (req, res) {
   });
 });
 
+var sendEmail = function (email, key) {
+  var deferred = Q.defer(),
+    payload = {
+      message: {
+        text: email.body,
+        subject: email.subject,
+        from_email: email.from || angularEnvVars[environment].email.from,
+        from_name: email.name || angularEnvVars[environment].email.name,
+        to: [],
+        headers: {
+          "Reply-To": email.from || angularEnvVars[environment].email.from
+        },
+        bcc_address: angularEnvVars[environment].email.from
+      }
+    },
+    to = email.to.split(','),
+    cc = email.cc ? email.cc.split(',') : [],
+    bcc = email.bcc ? email.bcc.split(',') : [],
+    addAddresses = function (list, type) {
+      var i = list.length;
+      while (i--) {
+        payload.message.to.push({type: type, email: list[i].trim()});
+      }
+    };
+
+  addAddresses(to, 'to');
+  addAddresses(cc, 'cc');
+  addAddresses(bcc, 'bcc');
+
+  mandrill.messages.send(payload, function (data) {
+    deferred.resolve({result: data, key: key});
+  }, function (err) {
+    deferred.reject({result: err, key: key});
+  });
+
+  return deferred.promise;
+};
+
+var sendJob = function () {
+    var queueRef = new Firebase(angularEnvVars[environment].firebase + '/islc/email/queue'),
+      queueDeferred = Q.defer(),
+      daysRef = firebaseRoot.child('islc').child('email').child('days'),
+      daysDeferred = Q.defer(),
+      deferreds = [];
+
+    queueRef.auth(firebaseSecret);
+
+    queueRef.once('value', function (queueSnapshot) {
+      queueDeferred.resolve(queueSnapshot.val());
+    });
+
+    daysRef.once('value', function (daysSnapshot) {
+      daysDeferred.resolve(daysSnapshot.val());
+    });
+
+    Q.all([queueDeferred.promise, daysDeferred.promise]).spread(function (queue, days) {
+      var deferred = Q.defer(),
+        today = moment(),
+        sendFlag = days[today.isoWeekday()];
+
+
+      _.each(queue, function (email, key, list) {
+
+        // Send email if it's a sending day or if the send date has passed.
+        console.log('queue', queue);
+        if ((!email.date && sendFlag) || (moment(email.date).unix() < today.unix())) {
+          deferreds.push(sendEmail(email, key));
+        }
+      });
+
+      Q.all(deferreds).then(deferred.resolve);
+
+      return deferred.promise;
+    }).then(function (emailResults) {
+        _.each(emailResults, function (data) {
+          console.log('Sent: ', data.result[0]);
+          if (data.result[0].status === 'sent') {
+            firebaseRoot.child('islc').child('email').child('queue').child(data.key).remove();
+          }
+
+        });
+    });
+
+
+  },
+  cron = new CronJob('00 00 * * * *', sendJob, function () {
+      console.log('cron job complete', arguments);
+    });
+
+console.log('starting email cron');
+cron.start();
+
+
+app.post('/email/:key', function (req, res) {
+  var key = req.params.key,
+    emailRef = new Firebase(angularEnvVars[environment].firebase + '/islc/email/queue/' + key),
+    emailDeferred = Q.defer(),
+    errorHandler = function (err) {
+      res.send(500, err);
+    };
+
+  emailRef.auth(firebaseSecret);
+
+  emailRef.once('value', function (emailSnapshot) {
+    emailDeferred.resolve(emailSnapshot.val());
+  });
+
+  emailDeferred.promise.then(function (email) {
+    sendEmail(email, key);
+  }).then(function (data) {
+    var deferred = Q.defer();
+
+    emailRef.remove(function (err) {
+      deferred.resolve({email: data, remove: err || true});
+    });
+
+    return deferred.promise;
+  }).then(res.json, errorHandler);
+
+});
+
 
 /**
  * Set up Angular routes to return index.html
@@ -264,6 +402,7 @@ app.get('/transactions', returnIndex);
 app.get('/files', returnIndex);
 app.get('/announcements', returnIndex);
 app.get('/images', returnIndex);
+app.get('/email', returnIndex);
 
 /**
  * Serve static files

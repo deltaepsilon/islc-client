@@ -1,0 +1,193 @@
+<div class="header">
+    <h1>Email</h1>
+</div>
+
+<div class="content">
+    <form name="emailForm">
+        <fieldset>
+            <div class="row">
+                <div class="column small-12">
+                    <h3>Select Email Days</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <input class="left" id="monday" name="sunday" type="checkbox" ng-model="email.days.1"/>
+                    <label for="monday">Monday</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <input class="left" id="tuesday" name="sunday" type="checkbox" ng-model="email.days.2"/>
+                    <label for="tuesday">Tuesday</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <input class="left" id="wednesday" name="sunday" type="checkbox" ng-model="email.days.3"/>
+                    <label for="wednesday">Wednesday</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <input class="left" id="thursday" name="sunday" type="checkbox" ng-model="email.days.4"/>
+                    <label for="thursday">Thursday</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <input class="left" id="friday" name="sunday" type="checkbox" ng-model="email.days.5"/>
+                    <label for="friday">Friday</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <input class="left" id="saturday" name="sunday" type="checkbox" ng-model="email.days.6"/>
+                    <label for="saturday">Saturday</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <input class="left" id="sunday" name="sunday" type="checkbox" ng-model="email.days.7" ng-change="updateEmail()"/>
+                    <label for="sunday">Sunday</label>
+                </div>
+            </div>
+
+        </fieldset>
+
+        <fieldset>
+            <div class="row">
+                <div class="column small-12">
+                    <h3>Create Email</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <input id="email-to" type="email" ng-model="newEmail.to" placeholder="To:" required=""/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <input id="email-cc" type="text" ng-model="newEmail.cc" placeholder="Cc:"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <input id="email-bcc" type="text" ng-model="newEmail.bcc" placeholder="Bcc:"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <input id="email-subject" type="text" ng-model="newEmail.subject" placeholder="Subject" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <input id="email-date" type="date" ng-model="newEmail.date"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <textarea class="small-12" name="email-body" id="email-body" ng-model="newEmail.body" placeholder="Markdown email body..." required=""></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <h3>Preview</h3>
+                </div>
+                <div class="column small-12">
+                    <ul>
+                        <li>
+                            <label>To: <strong>{{ newEmail.to || '...'}}</strong></label>
+                        </li>
+                        <li ng-show="newEmail.cc">
+                            <label>Cc: <strong>{{ newEmail.cc }}</strong></label>
+                        </li>
+                        <li ng-show="newEmail.bcc">
+                            <label>Bcc: <strong>{{ newEmail.bcc }}</strong></label>
+                        </li>
+                        <li ng-show="newEmail.date">
+                            <label>Date: <strong>{{ newEmail.date | date }}</strong></label>
+                        </li>
+                        <li>
+                            <label>Subject: <strong>{{ newEmail.subject || '...' }}</strong></label>
+                            <br>
+                        </li>
+                        <li>
+                            <label>Body:</label>
+                        </li>
+
+                    </ul>
+                    <br>
+                </div>
+                <div class="column small-12">
+                    <markdown class="bulleted-lists" ng-model="newEmail.body" line-breaks="true" strip="true"></markdown>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column small-12">
+                    <br>
+                    <br>
+                    <button ng-click="createEmail(newEmail)" ng-disabled="!emailForm.$valid">Create Email</button>
+                    <button ng-click="resetEmail()">Reset</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+    <table id="email-table" class="small-12">
+        <thead class="uppercase">
+        <tr>
+            <th>row</th>
+            <th>created</th>
+            <th>send date</th>
+            <th>recipients</th>
+            <th>body</th>
+            <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="row-{{ $index }}" ng-repeat="(id, email) in email.queue">
+            <td>{{ $index + 1 }}</td>
+            <td>{{ email.created | date }}</td>
+            <td>{{ calculateSendDate(email.date) | date:'MM/dd EEE' }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <label>To: <strong>{{ email.to || '...'}}</strong></label>
+                    </li>
+                    <li ng-show="newEmail.cc">
+                        <label>Cc: <strong>{{ email.cc }}</strong></label>
+                    </li>
+                    <li ng-show="newEmail.bcc">
+                        <label>Bcc: <strong>{{ email.bcc }}</strong></label>
+                    </li>
+                    <li ng-show="newEmail.date">
+                        <label>Date: <strong>{{ email.date | date }}</strong></label>
+                    </li>
+                    <li>
+                        <label>Subject: <strong>{{ email.subject || '...' }}</strong></label>
+                        <br>
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <markdown ng-model="email.body" line-breaks="true" strip="true"></markdown>
+            </td>
+            <td>
+                <button ng-click="deleteEmail(id)" class="tiny">Delete</button>
+                <button ng-click="copyEmail(email)" class="tiny">Copy</button>
+                <button ng-click="sendEmail(id)" class="tiny">Send Now</button>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="6">
+                <!--<button class="pure-button full-width" ng-click="getMoreComments()" ng-disabled="searchDisabled">Load More</button>-->
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+
+</div>

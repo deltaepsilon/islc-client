@@ -157,6 +157,20 @@ angular.module('islcClientApp', ['ui.router', 'ngGrid', 'angular-markdown', 'ngS
             }
           }
         }
+      })
+      .state('email', {
+        url: '/email',
+        views: {
+          body: {
+            templateUrl: 'views/email.html',
+            controller: 'EmailCtrl',
+            resolve: {
+              email: function (EmailService) {
+                return EmailService.get();
+              }
+            }
+          }
+        }
       });
 
     $locationProvider.html5Mode(true);
