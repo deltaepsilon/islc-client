@@ -12,43 +12,43 @@
             </div>
             <div class="row">
                 <div class="column small-12">
-                    <input class="left" id="monday" name="sunday" type="checkbox" ng-model="email.days.1"/>
+                    <input class="left" id="monday" name="sunday" type="checkbox" ng-model="email.days.1" ng-change="handleDaysChange()"/>
                     <label for="monday">Monday</label>
                 </div>
             </div>
             <div class="row">
                 <div class="column small-12">
-                    <input class="left" id="tuesday" name="sunday" type="checkbox" ng-model="email.days.2"/>
+                    <input class="left" id="tuesday" name="sunday" type="checkbox" ng-model="email.days.2" ng-change="handleDaysChange()"/>
                     <label for="tuesday">Tuesday</label>
                 </div>
             </div>
             <div class="row">
                 <div class="column small-12">
-                    <input class="left" id="wednesday" name="sunday" type="checkbox" ng-model="email.days.3"/>
+                    <input class="left" id="wednesday" name="sunday" type="checkbox" ng-model="email.days.3" ng-change="handleDaysChange()"/>
                     <label for="wednesday">Wednesday</label>
                 </div>
             </div>
             <div class="row">
                 <div class="column small-12">
-                    <input class="left" id="thursday" name="sunday" type="checkbox" ng-model="email.days.4"/>
+                    <input class="left" id="thursday" name="sunday" type="checkbox" ng-model="email.days.4" ng-change="handleDaysChange()"/>
                     <label for="thursday">Thursday</label>
                 </div>
             </div>
             <div class="row">
                 <div class="column small-12">
-                    <input class="left" id="friday" name="sunday" type="checkbox" ng-model="email.days.5"/>
+                    <input class="left" id="friday" name="sunday" type="checkbox" ng-model="email.days.5" ng-change="handleDaysChange()"/>
                     <label for="friday">Friday</label>
                 </div>
             </div>
             <div class="row">
                 <div class="column small-12">
-                    <input class="left" id="saturday" name="sunday" type="checkbox" ng-model="email.days.6"/>
+                    <input class="left" id="saturday" name="sunday" type="checkbox" ng-model="email.days.6" ng-change="handleDaysChange()"/>
                     <label for="saturday">Saturday</label>
                 </div>
             </div>
             <div class="row">
                 <div class="column small-12">
-                    <input class="left" id="sunday" name="sunday" type="checkbox" ng-model="email.days.7" ng-change="updateEmail()"/>
+                    <input class="left" id="sunday" name="sunday" type="checkbox" ng-model="email.days.7" ng-change="updateEmail()" ng-change="handleDaysChange()"/>
                     <label for="sunday">Sunday</label>
                 </div>
             </div>

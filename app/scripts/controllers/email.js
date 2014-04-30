@@ -2,8 +2,6 @@
 
 angular.module('islcClientApp')
   .controller('EmailCtrl', function ($scope, email, EmailService, _) {
-    var today = moment();
-
     $scope.email = email;
 
     $scope.email.$bind($scope, 'email', function () {
@@ -20,6 +18,10 @@ angular.module('islcClientApp')
         queue: {}
       }
     });
+
+    $scope.handleDaysChange = function () {
+      $scope.email.$save();
+    };
 
     $scope.createEmail = function (email) {
       EmailService.create(email);

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('islcClientApp', ['ui.router', 'ngGrid', 'angular-markdown', 'ngSanitize', 'restangular', 'firebase', 'flow', 'sticky'])
+angular.module('islcClientApp', ['ui.router', 'angular-markdown', 'ngSanitize', 'restangular', 'firebase', 'flow', 'sticky'])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider) {
     var env = window.envVars;
 
