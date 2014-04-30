@@ -10,6 +10,7 @@ var Q = require('q'),
   Mandrill = require('mandrill-api/mandrill').Mandrill,
   mandrill = new Mandrill(process.env.MANDRILL_API_KEY),
   CronJob = require('cron').CronJob,
+  markdown = require('markdown').markdown,
   app = express(),
   request = require('superagent'),
   environment = process.env.NODE_ENV || 'development',
@@ -253,10 +254,13 @@ app.del('/image/:fileName', function (req, res) {
   });
 });
 
+// Handle email queueing
+
 var sendEmail = function (email, key) {
   var deferred = Q.defer(),
     payload = {
       message: {
+        html: markdown.toHTML(email.body),
         text: email.body,
         subject: email.subject,
         from_email: email.from || angularEnvVars[environment].email.from,
@@ -371,6 +375,35 @@ app.post('/email/:key', function (req, res) {
 
     return deferred.promise;
   }).then(res.json, errorHandler);
+
+});
+
+app.post('/email', function (req, res) {
+  var email = {
+      body: req.body.body,
+      created: moment().format('YYYY-MM-DD'),
+      sent: false,
+      subject: req.body.subject,
+      to: req.body.to
+    },
+    queueRef = firebaseRoot.child('islc').child('email').child('queue'),
+    addFields = function (name) {
+      if (req.body[name]) {
+        email[name] = req.body[name];
+      }
+    };
+
+  addFields('date');
+  addFields('cc');
+  addFields('bcc');
+
+  queueRef.push(email, function (err) {
+    if (err) {
+      res.send(500, err);
+    } else {
+      res.json(email);
+    }
+  });
 
 });
 
