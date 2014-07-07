@@ -38,14 +38,14 @@
     <ul class="table-list striped" ng-if="!oldTable">
         <li ng-repeat="transaction in transactions.data.items">
             <div class="column small-12 background-gray3 text-white link-white padding-small">
-                <div class="left padding-horizontal-small">
+                <div class="left padding-small">
                     <input type="checkbox" ng-model="transaction.processed" ng-change="updateTransaction(transaction)"/>
                 </div>
-                <span>{{ transaction.id }}:</span>
-                <a class="pointer margin-horizontal-x-small" ng-click="setUserFilter(transaction.user)" title="Filter by: {{ transaction.user.username }}">{{ transaction.user.username }}</a>
-                <span class="right">#{{ $index + 1 }}</span>
-                <span class="right margin-horizontal-small">{{ transaction.created | date }}</span>
-                <a class="right margin-horizontal-small" href="mailto:{{ transaction.user.email }}">{{ transaction.user.email }}</a>
+                <span class="left margin-small">{{ transaction.id }}:</span>
+                <a class="pointer left margin-small" ng-click="setUserFilter(transaction.user)" title="Filter by: {{ transaction.user.username }}">{{ transaction.user.username }}</a>
+                <span class="right margin-small">#{{ $index + 1 }}</span>
+                <span class="right margin-small">{{ transaction.created | date }}</span>
+                <a class="right margin-small" href="mailto:{{ transaction.user.email }}">{{ transaction.user.email }}</a>
 
             </div>
 
