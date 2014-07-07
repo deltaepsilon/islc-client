@@ -1,0 +1,13 @@
+.table-list {
+  &> li {
+    @extend .row;
+
+  }
+
+  &.striped {
+    &> li:nth-of-type(even) {
+      @extend .background-gray1;
+    }
+  }
+
+}

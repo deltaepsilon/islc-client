@@ -25,6 +25,13 @@ $colors:
   .text-#{nth($color, 1)} {
     color : nth($color, 2);
   }
+
+  .link-#{nth($color, 1)} {
+    & a, a {
+      color : nth($color, 2);
+    }
+
+  }
 }
 
 @function getValueByKey($map, $key) {
