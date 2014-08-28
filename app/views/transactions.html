@@ -37,43 +37,48 @@
 
     <ul class="table-list striped" ng-if="!oldTable">
         <li ng-repeat="transaction in transactions.data.items">
-            <div class="column small-12 background-gray3 text-white link-white padding-small">
-                <div class="left padding-small">
+            <div class="column small-12 background-gray3 text-white link-white" style="padding-top: 1rem;">
+                <div class="left padding-xx-small">
                     <input type="checkbox" ng-model="transaction.processed" ng-change="updateTransaction(transaction)"/>
                 </div>
-                <span class="left margin-small">{{ transaction.id }}:</span>
-                <a class="pointer left margin-small" ng-click="setUserFilter(transaction.user)" title="Filter by: {{ transaction.user.username }}">{{ transaction.user.username }}</a>
-                <span class="right margin-small">#{{ $index + 1 }}</span>
-                <span class="right margin-small">{{ transaction.created | date }}</span>
-                <a class="right margin-small" href="mailto:{{ transaction.user.email }}">{{ transaction.user.email }}</a>
+                <span class="left margin-xx-small">{{ transaction.id }}:</span>
+                <a class="pointer left margin-xx-small" ng-click="setUserFilter(transaction.user)" title="Filter by: {{ transaction.user.username }}">{{ transaction.user.username }}</a>
+                <span class="right margin-xx-small">#{{ $index + 1 }}</span>
+                <span class="right margin-xx-small">{{ transaction.created | date }}</span>
+                <a class="right margin-xx-small" href="mailto:{{ transaction.user.email }}">
+                    {{ transaction.user.email }}
+                </a>
 
             </div>
 
             <div class="column small-12 medium-4 padding-small">
                 <p ng-repeat="product in transaction.products">
-                    {{ product.title }}
+                    <strong>{{ transaction.amount | currency }}</strong>
+                    <strong ng-show="transaction.discount_applied">- {{ transaction.discount_applied | currency }}</strong>
+                    <br>
+                    <span>{{ product.title }}</span>
                 </p>
 
             </div>
-            <div class="column small-12 medium-4 padding-small">
-                <p ng-show="transaction.discount_applied">
-                    Discount: {{ transaction.discount_applied | currency }}
-                </p>
-                <p>
-                    Total: {{ transaction.amount | currency }}
-                </p>
 
-            </div>
             <div class="column small-12 medium-4 padding-small">
-                <textarea style="min-height: 125px;" ng-show="transaction.user.address">{{ transaction.user.address.first }} {{ transaction.user.address.last }}
+                <p ng-repeat="(key, value) in transaction.survey">{{ value }}</p>
+            </div>
+
+            <div class="column small-12 medium-4 padding-small">
+                <textarea class="left" style="min-height: 125px;" ng-show="transaction.user.address">{{ transaction.user.address.first }} {{ transaction.user.address.last }}
 {{ transaction.user.address.line1 }} {{ transaction.user.address.line2 }} {{ transaction.user.address.line3 }}
 {{ transaction.user.address.city }}, {{ transaction.user.address.state }} {{ transaction.user.address.code }}
 {{ transaction.user.address.country }}
 {{ transaction.user.email }}</textarea>
+
+                <a ng-show="!transaction.user.address" href="mailto:{{ transaction.user.email }}?subject=I Still Love Calligraphy - Address Required&body={{ transaction.user.username }}, %0D%0A%0D%0A Our website failed to record your shipping address at checkout. %0D%0A%0D%0A Could you please respond to this email with your shipping address? I'll package and ship your supplies as soon as I receive it. %0D%0A%0D%0A Let me know if you have any questions, and happy lettering!">
+                    <i class="fi fi-mail"></i>
+                </a>
+
                 <p ng-show="transaction.user.address.instructions">
                     <span>{{ transaction.user.address.instructions }}</span>
                 </p>
-
 
             </div>
 

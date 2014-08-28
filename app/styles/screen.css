@@ -6685,65 +6685,70 @@ a {
 }
 
 /* line 106, modules/_global.scss */
+strong {
+  font-weight: 400;
+}
+
+/* line 110, modules/_global.scss */
 #body-view {
   padding: 0 1rem 4rem;
 }
 
-/* line 110, modules/_global.scss */
+/* line 114, modules/_global.scss */
 .padded-row {
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-/* line 115, modules/_global.scss */
+/* line 119, modules/_global.scss */
 .centered {
   margin-left: auto;
   margin-right: auto;
   max-width: 641px;
 }
 
-/* line 121, modules/_global.scss */
+/* line 125, modules/_global.scss */
 .lowercase {
   text-transform: lowercase;
 }
 
-/* line 125, modules/_global.scss */
+/* line 129, modules/_global.scss */
 .uppercase {
   text-transform: uppercase;
 }
 
-/* line 129, modules/_global.scss */
+/* line 133, modules/_global.scss */
 .capitalize {
   text-transform: capitalize;
 }
 
-/* line 133, modules/_global.scss */
+/* line 137, modules/_global.scss */
 .no-pointer {
   cursor: default;
 }
 
-/* line 137, modules/_global.scss */
+/* line 141, modules/_global.scss */
 .pointer {
   cursor: pointer;
 }
 
-/* line 141, modules/_global.scss */
+/* line 145, modules/_global.scss */
 .inline {
   display: inline;
 }
 
-/* line 145, modules/_global.scss */
+/* line 149, modules/_global.scss */
 .hidden {
   display: none;
 }
 
-/* line 150, modules/_global.scss */
+/* line 154, modules/_global.scss */
 .print-clicked {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
   opacity: 0.2;
 }
 
-/* line 155, modules/_global.scss */
+/* line 159, modules/_global.scss */
 .rotate-90 {
   transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
@@ -6755,7 +6760,7 @@ a {
   -ms-transform-origin: 50% 50%;
 }
 
-/* line 160, modules/_global.scss */
+/* line 164, modules/_global.scss */
 .rotate-180 {
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
@@ -6767,7 +6772,7 @@ a {
   -ms-transform-origin: 50% 50%;
 }
 
-/* line 165, modules/_global.scss */
+/* line 169, modules/_global.scss */
 .rotate-270 {
   transform: rotate(270deg);
   -webkit-transform: rotate(270deg);
@@ -6779,30 +6784,30 @@ a {
   -ms-transform-origin: 50% 50%;
 }
 
-/* line 170, modules/_global.scss */
+/* line 174, modules/_global.scss */
 .disabled {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
 }
 
-/* line 174, modules/_global.scss */
+/* line 178, modules/_global.scss */
 .stuck {
   position: fixed;
   top: 0;
   z-index: 100;
 }
-/* line 175, modules/_global.scss */
+/* line 179, modules/_global.scss */
 .stuck.stuck-column {
   position: fixed;
   left: 0;
   right: 0;
 }
 
-/* line 190, modules/_global.scss */
+/* line 194, modules/_global.scss */
 markdown p {
   margin-bottom: 1rem;
 }
-/* line 194, modules/_global.scss */
+/* line 198, modules/_global.scss */
 markdown ul {
   list-style: initial;
   padding-left: 1rem;
