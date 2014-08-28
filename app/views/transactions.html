@@ -54,7 +54,7 @@
             <div class="column small-12 medium-4 padding-small">
                 <p ng-repeat="product in transaction.products">
                     <strong>{{ transaction.amount | currency }}</strong>
-                    <strong ng-show="transaction.discount_applied">- {{ transaction.discount_applied | currency }}</strong>
+                    <strong ng-show="transaction.discount_applied">(- {{ transaction.discount_applied | currency }})</strong>
                     <br>
                     <span>{{ product.title }}</span>
                 </p>
